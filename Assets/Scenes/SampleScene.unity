@@ -189,7 +189,14 @@ MonoBehaviour:
   floatingSpeed: 1
   floatingTopBound: 1
   floatingBottomBound: 0
-  xNum: 40
+  xDistance: 2
+  yDistance: 2
+  zDistance: 3
+  eachXAmount: 40
+  position:
+    x: 0
+    y: 10
+    z: 20
   _mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   _material: {fileID: 2100000, guid: 0e8b27ae8b0695548b32684cd59f23ae, type: 2}
 --- !u!1 &705507993
