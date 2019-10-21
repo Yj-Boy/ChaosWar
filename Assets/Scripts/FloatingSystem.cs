@@ -15,11 +15,11 @@ public class FloatingSystem : JobComponentSystem
         public void Execute(ref Translation translation,ref FloatingComponent floating)
         {
             translation.Value.y += floating.speed * deltaTime;
-            if(translation.Value.y>0.5)
+            if(translation.Value.y> floating.floatingStartPosY + floating.topBound)
             {
                 floating.speed = -Mathf.Abs(floating.speed);
             }
-            if (translation.Value.y < 0)
+            if (translation.Value.y < floating.floatingStartPosY + floating.bottomBound)
             {
                 floating.speed = Mathf.Abs(floating.speed);
             }

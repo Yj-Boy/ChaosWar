@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CreateEnemyBesideBoss.cs" />
     <Compile Include="Assets\Scripts\CreatThousandsOfTroops.cs" />
     <Compile Include="Assets\Scripts\FloatingComponent.cs" />
     <Compile Include="Assets\Scripts\FloatingSystem.cs" />

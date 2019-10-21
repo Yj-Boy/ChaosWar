@@ -43,23 +43,32 @@ public class CreatThousandsOfTroops : MonoBehaviour
 
         entityManager.CreateEntity(entityArchetype, entityArr);
 
-        int positionX = 0;
+        float positionX = 0f;
         float positionZ = 0f;
         for(int i=0;i<entityArr.Length;i++)
         {
             entityManager.SetComponentData(entityArr[i], new MoveSpeedComponent { value = moveSpeed });
-            entityManager.SetComponentData(entityArr[i], new FloatingComponent { speed = floatingSpeed, topBound = floatingTopBound, bottomBound = floatingBottomBound });
+            float3 pos = new float3(
+                positionX - xNum / 2, 
+                noise.cnoise(new float2(positionX, 1f) * UnityEngine.Random.Range(0f, 1f)),
+                positionZ);
             entityManager.SetComponentData(entityArr[i], new Translation
             {
-                Value = transform.TransformPoint(
-                    new float3(positionX - xNum / 2, noise.cnoise(new float2(positionX, 1f)*UnityEngine.Random.Range(0f,1f)), positionZ))
+                Value = transform.TransformPoint(pos)
             });
+            entityManager.SetComponentData(entityArr[i], new FloatingComponent
+            {
+                speed = floatingSpeed,
+                topBound = floatingTopBound,
+                bottomBound = floatingBottomBound,
+                floatingStartPosY = 0
+            });    
             entityManager.SetComponentData(entityArr[i], new Rotation { Value = Quaternion.Euler(forwardVector)});
             entityManager.SetSharedComponentData(entityArr[i], new RenderMesh { mesh = _mesh, material = _material });
             positionX++;
             if (positionX % 10 == 0)
             {
-                positionX = 0;
+                positionX = 0f;
                 positionZ -= 1f;
             }             
         }
