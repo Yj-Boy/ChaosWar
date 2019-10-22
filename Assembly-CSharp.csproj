@@ -63,12 +63,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CreateEnemyBesideBoss.cs" />
+    <Compile Include="Assets\Scripts\CreateEnemyRotateByBoss.cs" />
+    <Compile Include="Assets\Scripts\CreateRotateCube.cs" />
     <Compile Include="Assets\Scripts\CreatThousandsOfTroops.cs" />
     <Compile Include="Assets\Scripts\FloatingComponent.cs" />
     <Compile Include="Assets\Scripts\FloatingSystem.cs" />
     <Compile Include="Assets\Scripts\MoveForwardComponent.cs" />
     <Compile Include="Assets\Scripts\MovementSystem.cs" />
     <Compile Include="Assets\Scripts\MoveSpeedComponent.cs" />
+    <Compile Include="Assets\Scripts\RotateByOnePointSystem.cs" />
+    <Compile Include="Assets\Scripts\RotateByWhichPointComponent.cs" />
+    <Compile Include="Assets\Scripts\RotateSpeedComponent.cs" />
+    <Compile Include="Assets\Scripts\RotateSystem.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GraduationProject/ChaosWar/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
