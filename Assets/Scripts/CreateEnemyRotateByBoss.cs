@@ -16,6 +16,11 @@ public class CreateEnemyRotateByBoss : MonoBehaviour
     private float radius;   //旋转半径
     //[SerializeField]
     //private float floatingSpeed, floatingTopBound, floatingBottomBound;   //浮动参数
+    [SerializeField]
+    private float rotateByOnePointSpeed;
+    [SerializeField]
+    private float rotateSelfSpeed;
+    private float rotateSelfAngle;
     
     [SerializeField]
     private Mesh _mesh;     //实体渲染网格
@@ -34,7 +39,8 @@ public class CreateEnemyRotateByBoss : MonoBehaviour
             typeof(Translation),
             typeof(Rotation),
             typeof(RotateByWhichPointComponent),
-            typeof(RotateSpeedComponent),
+            typeof(MoveSpeedComponent),
+            typeof(MoveForwardComponent),
             typeof(RenderMesh),
             typeof(LocalToWorld)
             );
@@ -48,28 +54,33 @@ public class CreateEnemyRotateByBoss : MonoBehaviour
         //初始化每个实体对象
         for (int i = 0; i < entityArr.Length; i++)
         {
+            float3 pos;
+            int x = UnityEngine.Random.Range(0, 360);
+            int z = UnityEngine.Random.Range(0, 360);
+            pos.x= position.x + UnityEngine.Random.Range(-radius,radius) * math.cos(x * math.PI / 180);
+            pos.y = UnityEngine.Random.Range(-radius, radius);
+            pos.z = position.z + UnityEngine.Random.Range(-radius, radius) * math.sin(z * math.PI / 180);
+
+            float a = math.abs(Vector2.Angle(new Vector2(pos.x, pos.z), new Vector2(1, 0)));
+            rotateSelfAngle = 180 - a;
+
             entityManager.SetComponentData(entityArr[i], new Translation
             {
-                Value = transform.TransformPoint(position + new float3(
-                    UnityEngine.Random.Range(-radius, radius),
-                    UnityEngine.Random.Range(-radius, radius),
-                    UnityEngine.Random.Range(-radius, radius)))
-                //Value = position + new float3(
-                //    UnityEngine.Random.Range(-radius, radius),
-                //    UnityEngine.Random.Range(-radius, radius),
-                //    UnityEngine.Random.Range(-radius, radius))
+                Value = pos
             });
 
+            entityManager.SetComponentData(entityArr[i], new MoveSpeedComponent
+            {
+                value = 0
+            });
             entityManager.SetComponentData(entityArr[i], new RotateByWhichPointComponent
             {
                 point = position,
-                angle = 0,
-                radius = radius
+                speed = rotateByOnePointSpeed,
+                angle = rotateSelfAngle,
+                radius = UnityEngine.Random.Range(-radius, radius)
             });
-            entityManager.SetComponentData(entityArr[i], new RotateSpeedComponent
-            {
-                value = 1
-            });
+
             entityManager.SetSharedComponentData(entityArr[i], new RenderMesh
             {
                 mesh = _mesh,

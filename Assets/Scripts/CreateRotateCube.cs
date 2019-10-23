@@ -1,5 +1,7 @@
-﻿using Unity.Collections;
-using System.Collections.Generic;
+﻿/*
+ *  创建自身旋转实体（测试） 
+ */
+using Unity.Collections;
 using UnityEngine;
 using Unity.Entities;
 using Unity.Transforms;
@@ -14,6 +16,7 @@ public class CreateRotateCube : MonoBehaviour
     private float3 position;    //生成实体位置
     [SerializeField]
     private float speed;
+    private float angle;
 
     [SerializeField]
     private Mesh _mesh;     //实体渲染网格
@@ -31,7 +34,7 @@ public class CreateRotateCube : MonoBehaviour
         EntityArchetype entityArchetype = entityManager.CreateArchetype(
             typeof(Translation),
             typeof(Rotation),
-            typeof(RotateSpeedComponent),
+            typeof(RotateComponent),
             typeof(RenderMesh),
             typeof(LocalToWorld)
             );
@@ -50,10 +53,12 @@ public class CreateRotateCube : MonoBehaviour
                 Value = transform.TransformPoint(position)     
             });
 
-           
-            entityManager.SetComponentData(entityArr[i], new RotateSpeedComponent
+            angle = UnityEngine.Random.Range(0, 360);
+            entityManager.SetComponentData(entityArr[i], new RotateComponent
             {
-                value = speed
+                speed = speed,
+                angle = angle,
+                initAngle = angle
             });
             entityManager.SetSharedComponentData(entityArr[i], new RenderMesh
             {

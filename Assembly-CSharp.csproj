@@ -73,7 +73,7 @@
     <Compile Include="Assets\Scripts\MoveSpeedComponent.cs" />
     <Compile Include="Assets\Scripts\RotateByOnePointSystem.cs" />
     <Compile Include="Assets\Scripts\RotateByWhichPointComponent.cs" />
-    <Compile Include="Assets\Scripts\RotateSpeedComponent.cs" />
+    <Compile Include="Assets\Scripts\RotateComponent.cs" />
     <Compile Include="Assets\Scripts\RotateSystem.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GraduationProject/ChaosWar/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
