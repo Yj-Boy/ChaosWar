@@ -159,7 +159,7 @@ MonoBehaviour:
   floatingBottomBound: 0
   xNum: 10
   forwardVector: {x: 0, y: 0, z: 1}
-  _mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  _mesh: {fileID: -4100285154923791470, guid: a3bbd4d45e7398b49b0bd6b7dc8c8613, type: 3}
   _material: {fileID: 2100000, guid: 0e8b27ae8b0695548b32684cd59f23ae, type: 2}
 --- !u!4 &418798941
 Transform:
@@ -219,9 +219,12 @@ MonoBehaviour:
     y: 0
     z: 0
   radius: 10
-  rotateByOnePointSpeed: 10
-  rotateSelfSpeed: 1
-  _mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  rotateSpeed: 0.6
+  moveSpeed: 20
+  floatingSpeed: 3
+  floatingTopBound: 5
+  floatingBottomBound: -5
+  _mesh: {fileID: -4100285154923791470, guid: a3bbd4d45e7398b49b0bd6b7dc8c8613, type: 3}
   _material: {fileID: 2100000, guid: 0e8b27ae8b0695548b32684cd59f23ae, type: 2}
 --- !u!114 &418798944
 MonoBehaviour:

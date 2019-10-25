@@ -71,8 +71,8 @@
     <Compile Include="Assets\Scripts\MoveForwardComponent.cs" />
     <Compile Include="Assets\Scripts\MovementSystem.cs" />
     <Compile Include="Assets\Scripts\MoveSpeedComponent.cs" />
+    <Compile Include="Assets\Scripts\RotateByOnePointComponent.cs" />
     <Compile Include="Assets\Scripts\RotateByOnePointSystem.cs" />
-    <Compile Include="Assets\Scripts\RotateByWhichPointComponent.cs" />
     <Compile Include="Assets\Scripts\RotateComponent.cs" />
     <Compile Include="Assets\Scripts\RotateSystem.cs" />
     <Reference Include="Unity.Timeline.Editor">
