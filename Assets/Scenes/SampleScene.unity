@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 418798942}
   - component: {fileID: 418798943}
   - component: {fileID: 418798944}
+  - component: {fileID: 418798945}
   m_Layer: 0
   m_Name: _script
   m_TagString: Untagged
@@ -208,7 +209,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418798939}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8925c51d9021f446877fb33ff20a6f6, type: 3}
   m_Name: 
@@ -245,6 +246,29 @@ MonoBehaviour:
     z: 1
   speed: 1
   _mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  _material: {fileID: 2100000, guid: 0e8b27ae8b0695548b32684cd59f23ae, type: 2}
+--- !u!114 &418798945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418798939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a018d95faa6be904fbe4c8b6f701d7a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 20
+  radius: 5
+  position:
+    x: 0
+    y: 0
+    z: 0
+  moveSpeed: 10
+  angle: 0
+  speed: 60
+  _mesh: {fileID: -4100285154923791470, guid: a3bbd4d45e7398b49b0bd6b7dc8c8613, type: 3}
   _material: {fileID: 2100000, guid: 0e8b27ae8b0695548b32684cd59f23ae, type: 2}
 --- !u!1 &705507993
 GameObject:
@@ -414,7 +438,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 5, z: -50}
+  m_LocalPosition: {x: 0, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

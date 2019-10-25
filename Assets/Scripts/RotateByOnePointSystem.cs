@@ -22,30 +22,21 @@ public class RotateByOnePointSystem : JobComponentSystem
              * x1 = x0 + r * cos(a * PI / 180)
              * y1 = y0 + r * sin(a * PI / 180)    
              */
-            //translation.Value.x = rotateByWhichPoint.point.x + rotateByWhichPoint.radius * math.cos((rotateByWhichPoint.angle * math.PI / 90));
-            //translation.Value.z = rotateByWhichPoint.point.z + rotateByWhichPoint.radius * math.sin((rotateByWhichPoint.angle * math.PI / 90));
+            translation.Value.x = rotateByOnePoint.point.x + rotateByOnePoint.radius * math.cos((rotateByOnePoint.angle * math.PI / 90));
+            translation.Value.y = rotateByOnePoint.point.y + rotateByOnePoint.radius * math.sin((rotateByOnePoint.angle * math.PI / 90));
 
-            //rotation.Value = quaternion.Euler(math.up() * rotateByOnePoint.angleSelf);
-
-
-            //if (rotateByWhichPoint.duration >= 0)
-            //{
-            //    rotateByWhichPoint.angle += rotateByWhichPoint.speed * deltaTime;
-            //    if (rotateByWhichPoint.angle >= 360)
-            //        rotateByWhichPoint.angle = 0f;
-            //    rotateByWhichPoint.angleSelf += rotateByWhichPoint.speedSelf * deltaTime;
-            //    if (rotateByWhichPoint.angleSelf >= 360)
-            //        rotateByWhichPoint.angleSelf = 0f;
-            //}
-            //else if (rotateByWhichPoint.duration < 0)
-            //{
-            //    rotateByWhichPoint.angle -= rotateByWhichPoint.speed * deltaTime;
-            //    if (rotateByWhichPoint.angle <= -360f)
-            //        rotateByWhichPoint.angle = 0f;
-            //    rotateByWhichPoint.angleSelf -= rotateByWhichPoint.speedSelf * deltaTime;
-            //    if (rotateByWhichPoint.angleSelf <= -360f)
-            //        rotateByWhichPoint.angleSelf = 0f;
-            //}
+            if (rotateByOnePoint.duration >= 0)
+            {
+                rotateByOnePoint.angle += rotateByOnePoint.speed * deltaTime;
+                if (rotateByOnePoint.angle >= 360)
+                    rotateByOnePoint.angle = 0f;               
+            }
+            else if (rotateByOnePoint.duration < 0)
+            {
+                rotateByOnePoint.angle -= rotateByOnePoint.speed * deltaTime;
+                if (rotateByOnePoint.angle <= -360f)
+                    rotateByOnePoint.angle = 0f;
+            }
         }
     }
 

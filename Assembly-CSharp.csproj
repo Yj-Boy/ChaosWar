@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CreateBossMainSkill.cs" />
     <Compile Include="Assets\Scripts\CreateEnemyBesideBoss.cs" />
     <Compile Include="Assets\Scripts\CreateEnemyRotateByBoss.cs" />
     <Compile Include="Assets\Scripts\CreateRotateCube.cs" />

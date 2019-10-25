@@ -11,6 +11,4 @@ public struct RotateByOnePointComponent : IComponentData
     public float angle;     //旋转累计角度
     public float radius;    //旋转半径
     public float duration;
-    public float speedSelf;
-    public float angleSelf;
 }
