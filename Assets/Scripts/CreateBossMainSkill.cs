@@ -21,6 +21,11 @@ public class CreateBossMainSkill : MonoBehaviour
     private float angle;
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private float spawnSpeed;
+    [SerializeField]
+    private float spawnTime;
+    private float spawnTmpTime;
 
     [SerializeField]
     private Mesh _mesh;
@@ -28,11 +33,23 @@ public class CreateBossMainSkill : MonoBehaviour
     private Material _material;
 
     EntityManager entityManager;
-
     private void Start()
     {
         entityManager = World.Active.EntityManager;
+    }
 
+    private void Update()
+    {
+        spawnTmpTime += spawnSpeed * Time.deltaTime;
+        if(spawnTmpTime>=spawnTime)
+        {
+            Spawn();
+            spawnTmpTime = 0;
+        }
+    }
+
+    private void Spawn()
+    {
         EntityArchetype entityArchetype = entityManager.CreateArchetype(
             typeof(Translation),
             typeof(Rotation),
@@ -47,11 +64,11 @@ public class CreateBossMainSkill : MonoBehaviour
 
         entityManager.CreateEntity(entityArchetype, entityArr);
 
-        for(int i=0;i<entityArr.Length;i++)
+        for (int i = 0; i < entityArr.Length; i++)
         {
             float r = UnityEngine.Random.Range(-radius, radius);
             pos.x = position.x + r * math.cos(UnityEngine.Random.Range(0, 360) * math.PI / 180);
-            pos.y = position.z + r * math.sin(UnityEngine.Random.Range(0, 360) * math.PI / 180); 
+            pos.y = position.z + r * math.sin(UnityEngine.Random.Range(0, 360) * math.PI / 180);
             pos.z = UnityEngine.Random.Range(-radius, radius);
             entityManager.SetComponentData(entityArr[i], new Translation
             {
@@ -65,7 +82,7 @@ public class CreateBossMainSkill : MonoBehaviour
 
             entityManager.SetComponentData(entityArr[i], new Rotation
             {
-                Value=quaternion.Euler(math.up()*135)
+                Value = quaternion.Euler(math.up() * 135)
             });
             angle = math.abs(Vector2.Angle(new Vector2(pos.x, pos.y), new Vector2(1, 0)));
             entityManager.SetComponentData(entityArr[i], new RotateByOnePointComponent
@@ -74,12 +91,12 @@ public class CreateBossMainSkill : MonoBehaviour
                 angle = angle,
                 radius = radius,
                 speed = speed,
-                duration=UnityEngine.Random.Range(-1,0)
+                duration = UnityEngine.Random.Range(-1, 0)
             });
             entityManager.SetSharedComponentData(entityArr[i], new RenderMesh
             {
                 mesh = _mesh,
-                material=_material
+                material = _material
             });
         }
         entityArr.Dispose();
