@@ -1,5 +1,5 @@
 ﻿/*
- *  实体围绕某一点旋转系统 （弃用）
+ *  实体围绕某一点旋转系统
  */
 using System.Collections;
 using System.Collections.Generic;

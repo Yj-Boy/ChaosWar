@@ -1,5 +1,5 @@
 ﻿/*
- *  围绕某个点旋转组件（弃用）
+ *  围绕某个点旋转组件
  */
 using Unity.Entities;
 using Unity.Mathematics;

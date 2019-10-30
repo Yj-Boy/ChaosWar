@@ -47,7 +47,6 @@ public class CreateEnemyRotateByBoss : MonoBehaviour
         EntityArchetype entityArchetype = entityManager.CreateArchetype(
             typeof(Translation),
             typeof(Rotation),
-            typeof(RotateByOnePointComponent),
             typeof(MoveSpeedComponent),
             typeof(MoveForwardComponent),
             typeof(RotateComponent),

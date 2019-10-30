@@ -1,4 +1,13 @@
-﻿using Unity.Collections;
+﻿/*
+ *  Boss的大招
+ *  
+ *  主要由以下组件组成
+ *  RotateByOnePointComponent
+ *  MoveSpeedComponent
+ *  TimeComponent
+ *  
+ */
+using Unity.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Entities;
@@ -9,42 +18,47 @@ using Unity.Rendering;
 public class CreateBossMainSkill : MonoBehaviour
 {
     [SerializeField]
-    private int amount;
+    private int amount;             //实体数量
     [SerializeField]
-    private float radius;
+    private float radius;           //技能圆柱体半径
     [SerializeField]
-    private float3 position;
-    private float3 pos;
+    private float3 position;        //技能位置
+    private float3 pos;             //每个实体的具体位置
     [SerializeField]
-    private float moveSpeed;
+    private float moveSpeed;        //技能速度
+    private float angle;            //技能初始角度
     [SerializeField]
-    private float angle;
+    private float speed;            //技能圆柱体旋转速度
     [SerializeField]
-    private float speed;
+    private float spawnSpeed;       //技能生成速度
     [SerializeField]
-    private float spawnSpeed;
+    private float spawnTime;        //技能生成的时间间隔
+    private float spawnTmpTime;     //距离上一段技能生成的时间
+    
     [SerializeField]
-    private float spawnTime;
-    private float spawnTmpTime;
+    private int skillTime;          //生成实体的次数
+    private int times;              //累计生成实体的次数
 
     [SerializeField]
-    private Mesh _mesh;
+    private Mesh _mesh;             //渲染实体的网格
     [SerializeField]
-    private Material _material;
+    private Material _material;     //渲染实体的材质
 
-    EntityManager entityManager;
+    EntityManager entityManager;    //实体管理对象
     private void Start()
     {
         entityManager = World.Active.EntityManager;
+        times = 0;
     }
 
     private void Update()
     {
         spawnTmpTime += spawnSpeed * Time.deltaTime;
-        if(spawnTmpTime>=spawnTime)
+        if(times<skillTime&&spawnTmpTime>=spawnTime)
         {
             Spawn();
             spawnTmpTime = 0;
+            times++;
         }
     }
 
@@ -56,6 +70,7 @@ public class CreateBossMainSkill : MonoBehaviour
             typeof(MoveSpeedComponent),
             typeof(MoveForwardComponent),
             typeof(RotateByOnePointComponent),
+            typeof(TimeComponent),
             typeof(RenderMesh),
             typeof(LocalToWorld)
             );
@@ -92,6 +107,9 @@ public class CreateBossMainSkill : MonoBehaviour
                 radius = radius,
                 speed = speed,
                 duration = UnityEngine.Random.Range(-1, 0)
+            });
+            entityManager.SetComponentData(entityArr[i], new TimeComponent {
+                value = 2f
             });
             entityManager.SetSharedComponentData(entityArr[i], new RenderMesh
             {
