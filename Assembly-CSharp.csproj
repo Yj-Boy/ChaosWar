@@ -62,22 +62,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CreateBossMainSkill.cs" />
-    <Compile Include="Assets\Scripts\CreateEnemyBesideBoss.cs" />
-    <Compile Include="Assets\Scripts\CreateEnemyRotateByBoss.cs" />
-    <Compile Include="Assets\Scripts\CreateRotateCube.cs" />
-    <Compile Include="Assets\Scripts\CreatThousandsOfTroops.cs" />
-    <Compile Include="Assets\Scripts\FloatingComponent.cs" />
-    <Compile Include="Assets\Scripts\FloatingSystem.cs" />
-    <Compile Include="Assets\Scripts\MoveForwardComponent.cs" />
-    <Compile Include="Assets\Scripts\MovementSystem.cs" />
-    <Compile Include="Assets\Scripts\MoveSpeedComponent.cs" />
-    <Compile Include="Assets\Scripts\RotateByOnePointComponent.cs" />
-    <Compile Include="Assets\Scripts\RotateByOnePointSystem.cs" />
-    <Compile Include="Assets\Scripts\RotateComponent.cs" />
-    <Compile Include="Assets\Scripts\RotateSystem.cs" />
-    <Compile Include="Assets\Scripts\TimeComponent.cs" />
-    <Compile Include="Assets\Scripts\TimeToDestorySystem.cs" />
+    <Compile Include="Assets\Scripts\Currency\Progressbar.cs" />
+    <Compile Include="Assets\Scripts\ECS\CreateBossMainSkill.cs" />
+    <Compile Include="Assets\Scripts\ECS\CreateEnemyBesideBoss.cs" />
+    <Compile Include="Assets\Scripts\ECS\CreateEnemyRotateByBoss.cs" />
+    <Compile Include="Assets\Scripts\ECS\CreateRotateCube.cs" />
+    <Compile Include="Assets\Scripts\ECS\CreatThousandsOfTroops.cs" />
+    <Compile Include="Assets\Scripts\ECS\FloatingComponent.cs" />
+    <Compile Include="Assets\Scripts\ECS\FloatingSystem.cs" />
+    <Compile Include="Assets\Scripts\ECS\MoveForwardComponent.cs" />
+    <Compile Include="Assets\Scripts\ECS\MovementSystem.cs" />
+    <Compile Include="Assets\Scripts\ECS\MoveSpeedComponent.cs" />
+    <Compile Include="Assets\Scripts\ECS\RotateByOnePointComponent.cs" />
+    <Compile Include="Assets\Scripts\ECS\RotateByOnePointSystem.cs" />
+    <Compile Include="Assets\Scripts\ECS\RotateComponent.cs" />
+    <Compile Include="Assets\Scripts\ECS\RotateSystem.cs" />
+    <Compile Include="Assets\Scripts\ECS\TimeComponent.cs" />
+    <Compile Include="Assets\Scripts\ECS\TimeToDestorySystem.cs" />
+    <Compile Include="Assets\Scripts\StartScene\StartSceneUIController.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GraduationProject/ChaosWar/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
