@@ -14,6 +14,8 @@ public class CreatThousandsOfTroops : MonoBehaviour
     [SerializeField]
     private int amount;     //实体总数
     [SerializeField]
+    private float3 position;    //生成实体的位置
+    [SerializeField]
     private float moveSpeed;    //移动速度
     [SerializeField]
     private float floatingSpeed,floatingTopBound,floatingBottomBound;   //浮动参数
@@ -58,9 +60,9 @@ public class CreatThousandsOfTroops : MonoBehaviour
         {
             entityManager.SetComponentData(entityArr[i], new MoveSpeedComponent { value = moveSpeed });
             float3 pos = new float3(
-                positionX - xNum / 2, 
-                noise.cnoise(new float2(positionX, 1f) * UnityEngine.Random.Range(0f, 1f)),
-                positionZ);
+                position.x+positionX - xNum / 2, 
+                position.y+noise.cnoise(new float2(positionX, 1f) * UnityEngine.Random.Range(0f, 1f)),
+                position.z+positionZ);
             entityManager.SetComponentData(entityArr[i], new Translation
             {
                 Value = transform.TransformPoint(pos)
@@ -70,12 +72,18 @@ public class CreatThousandsOfTroops : MonoBehaviour
                 speed = floatingSpeed,
                 topBound = floatingTopBound,
                 bottomBound = floatingBottomBound,
-                floatingStartPosY = 0
+                floatingStartPosY = position.y
             });    
-            entityManager.SetComponentData(entityArr[i], new Rotation { Value = Quaternion.Euler(forwardVector)});
-            entityManager.SetSharedComponentData(entityArr[i], new RenderMesh { mesh = _mesh, material = _material });
+            entityManager.SetComponentData(entityArr[i], new Rotation
+            {
+                Value = Quaternion.Euler(forwardVector)
+            });
+            entityManager.SetSharedComponentData(entityArr[i], new RenderMesh
+            {
+                mesh = _mesh, material = _material
+            });
             positionX++;
-            if (positionX % 10 == 0)
+            if (positionX % xNum == 0)
             {
                 positionX = 0f;
                 positionZ -= 1f;

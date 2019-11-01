@@ -73,9 +73,15 @@ public class CreateEnemyRotateByBoss : MonoBehaviour
             //int z = UnityEngine.Random.Range(0, 360);
 
             //计算已radius为半径的实体位置
-            float r = UnityEngine.Random.Range(-radius, radius);
+            float r;
+            do
+            {
+                r = UnityEngine.Random.Range(-radius, radius);
+            } while (r > -2 && r < 2);
+            
+
             pos.x= position.x + r * math.cos(UnityEngine.Random.Range(0, 360) * math.PI / 180);
-            pos.y = UnityEngine.Random.Range(-radius, radius);
+            pos.y = position.y+UnityEngine.Random.Range(-radius, radius);
             pos.z = position.z + r * math.sin(UnityEngine.Random.Range(0, 360) * math.PI / 180);
 
             entityManager.SetComponentData(entityArr[i], new Translation

@@ -9,18 +9,21 @@ using UnityEngine.UI;
 
 public class StartSceneUIController : MonoBehaviour
 {
-    public Text musicControlText;
+    public Text musicControlText;       //音乐开关文字提示
 
+    //开始游戏
     public void StartGame()
     {
         SceneManager.LoadScene("GameScene");
     }
 
+    //结束游戏
     public void ExitGame()
     {
         Application.Quit();
     }
 
+    //背景音乐控制开关
     public void AudioControl(AudioSource audioSource)
     {
         if(audioSource.isPlaying)
