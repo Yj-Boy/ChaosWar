@@ -1175,16 +1175,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545295959}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d612db7f69b044459b03140ff91b595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 2000
+  amount: 1000
   position:
     x: 0
-    y: 5
-    z: -50
+    y: 2
+    z: -55
   moveSpeed: 5
   floatingSpeed: 2
   floatingTopBound: 0.5
