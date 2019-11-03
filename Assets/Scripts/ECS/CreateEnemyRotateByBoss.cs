@@ -125,5 +125,7 @@ public class CreateEnemyRotateByBoss : MonoBehaviour
         }
         //释放实体数组
         entityArr.Dispose();
+
+        GameObject.Find("_script").GetComponent<ShakeCamera>().SetCameraShake(10f, 0.2f, 0.5f);
     }
 }

@@ -63,13 +63,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Currency\Progressbar.cs" />
+    <Compile Include="Assets\Scripts\Currency\ShakeCamera.cs" />
+    <Compile Include="Assets\Scripts\ECS\CollisionSystem.cs" />
     <Compile Include="Assets\Scripts\ECS\CreateBossMainSkill.cs" />
     <Compile Include="Assets\Scripts\ECS\CreateEnemyBesideBoss.cs" />
     <Compile Include="Assets\Scripts\ECS\CreateEnemyRotateByBoss.cs" />
     <Compile Include="Assets\Scripts\ECS\CreateRotateCube.cs" />
+    <Compile Include="Assets\Scripts\ECS\CreateWallToDestroy.cs" />
     <Compile Include="Assets\Scripts\ECS\CreatThousandsOfTroops.cs" />
+    <Compile Include="Assets\Scripts\ECS\DestorySystem.cs" />
     <Compile Include="Assets\Scripts\ECS\FloatingComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\FloatingSystem.cs" />
+    <Compile Include="Assets\Scripts\ECS\IsDestroyComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\MoveForwardComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\MovementSystem.cs" />
     <Compile Include="Assets\Scripts\ECS\MoveSpeedComponent.cs" />
@@ -77,8 +82,10 @@
     <Compile Include="Assets\Scripts\ECS\RotateByOnePointSystem.cs" />
     <Compile Include="Assets\Scripts\ECS\RotateComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\RotateSystem.cs" />
-    <Compile Include="Assets\Scripts\ECS\TimeComponent.cs" />
-    <Compile Include="Assets\Scripts\ECS\TimeToDestorySystem.cs" />
+    <Compile Include="Assets\Scripts\ECS\TimeToLiveComponent.cs" />
+    <Compile Include="Assets\Scripts\ECS\TimeToLiveSystem.cs" />
+    <Compile Include="Assets\Scripts\ECS\TroopsTagComponent.cs" />
+    <Compile Include="Assets\Scripts\ECS\WallTagComponent.cs" />
     <Compile Include="Assets\Scripts\StartScene\StartSceneUIController.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GraduationProject/ChaosWar/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

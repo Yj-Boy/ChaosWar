@@ -70,7 +70,7 @@ public class CreateBossMainSkill : MonoBehaviour
             typeof(MoveSpeedComponent),
             typeof(MoveForwardComponent),
             typeof(RotateByOnePointComponent),
-            typeof(TimeComponent),
+            typeof(TimeToLiveComponent),
             typeof(RenderMesh),
             typeof(LocalToWorld)
             );
@@ -108,7 +108,7 @@ public class CreateBossMainSkill : MonoBehaviour
                 speed = speed,
                 duration = UnityEngine.Random.Range(-1, 0)
             });
-            entityManager.SetComponentData(entityArr[i], new TimeComponent {
+            entityManager.SetComponentData(entityArr[i], new TimeToLiveComponent {
                 value = 2f
             });
             entityManager.SetSharedComponentData(entityArr[i], new RenderMesh

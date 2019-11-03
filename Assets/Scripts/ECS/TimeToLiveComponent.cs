@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Entities;
 
-public struct TimeComponent : IComponentData
+public struct TimeToLiveComponent : IComponentData
 {
     public float value;
 }

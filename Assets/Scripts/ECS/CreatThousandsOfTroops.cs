@@ -25,7 +25,7 @@ public class CreatThousandsOfTroops : MonoBehaviour
     private float floatingBottomBound;      //浮动参数
     [SerializeField]
     private int xNum;                       //x轴的实体数量
-    //private int yNum;                       //生成多少列的实体
+    //private int yNum;                     //生成多少列的实体
     [SerializeField]
     private Vector3 forwardVector;          //移动朝向（xyz）                                    
     [SerializeField]
@@ -48,6 +48,9 @@ public class CreatThousandsOfTroops : MonoBehaviour
             typeof(Translation),
             typeof(Rotation),
             typeof(MoveForwardComponent),
+            typeof(TimeToLiveComponent),
+            typeof(IsDestroyComponent),
+            typeof(TroopsTagComponent),
             typeof(RenderMesh),
             typeof(LocalToWorld)
             );
@@ -95,6 +98,14 @@ public class CreatThousandsOfTroops : MonoBehaviour
             entityManager.SetComponentData(entityArr[i], new Rotation
             {
                 Value = Quaternion.Euler(forwardVector)
+            });
+            entityManager.SetComponentData(entityArr[i], new TimeToLiveComponent
+            {
+                value = 30f
+            });
+            entityManager.SetComponentData(entityArr[i], new IsDestroyComponent
+            {
+                value = false,
             });
             entityManager.SetSharedComponentData(entityArr[i], new RenderMesh
             {
