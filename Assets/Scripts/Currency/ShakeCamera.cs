@@ -9,12 +9,12 @@ public class ShakeCamera : MonoBehaviour
     public Transform camTransform;
 
     //持续抖动的时长
-    private float shake=10f;
+    private static float shake=0f;
 
     // 抖动幅度（振幅）
     //振幅越大抖动越厉害
-    private float shakeAmount=0.2f;
-    private float decreaseFactor=0.5f;
+    private static float shakeAmount =0.2f;
+    private static float decreaseFactor =0.5f;
 
     Vector3 originalPos;
 
@@ -46,11 +46,10 @@ public class ShakeCamera : MonoBehaviour
         }
     }
 
-    public void SetCameraShake(float time, float amout, float decrease)
+    public static void SetCameraShake(float time,float amount,float decrease)
     {
         shake = time;
-        shakeAmount = amout;
-        decreaseFactor= decrease;
-        Debug.Log("shaketime:" + this.shake);
+        shakeAmount = amount;
+        decreaseFactor = decrease;
     }
 }

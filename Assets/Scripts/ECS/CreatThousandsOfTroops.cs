@@ -129,5 +129,8 @@ public class CreatThousandsOfTroops : MonoBehaviour
         //{
         //    CancelInvoke();
         //}
+
+        ShakeCamera.SetCameraShake(10f,0.2f,0.5f);
+        //GameObject.Find("_script").GetComponent<ShakeCamera>().SetCameraShakeTime(10f);
     }
 }

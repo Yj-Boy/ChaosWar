@@ -51,6 +51,7 @@ public class CreateEnemyRotateByBoss : MonoBehaviour
             typeof(MoveForwardComponent),
             typeof(RotateComponent),
             typeof(FloatingComponent),
+            typeof(Scale),
             typeof(RenderMesh),
             typeof(LocalToWorld)
             );
@@ -117,6 +118,11 @@ public class CreateEnemyRotateByBoss : MonoBehaviour
                 floatingStartPosY = pos.y
             });
 
+            entityManager.SetComponentData(entityArr[i], new Scale
+            {
+                Value = 10
+            });
+
             entityManager.SetSharedComponentData(entityArr[i], new RenderMesh
             {
                 mesh = _mesh,
@@ -125,7 +131,5 @@ public class CreateEnemyRotateByBoss : MonoBehaviour
         }
         //释放实体数组
         entityArr.Dispose();
-
-        GameObject.Find("_script").GetComponent<ShakeCamera>().SetCameraShake(10f, 0.2f, 0.5f);
     }
 }
