@@ -62,10 +62,11 @@ public class CreatThousandsOfTroops : MonoBehaviour
         //{
         //    InvokeRepeating("SpawnEntity", 0.3f, 0.3f);
         //}
-        SpawnEntity();
+
+        //SpawnEntity();
     }
 
-    private void SpawnEntity()
+    public void SpawnEntity()
     {
         //创建实体数组
         NativeArray<Entity> entityArr = new NativeArray<Entity>(amount, Allocator.Persistent);
