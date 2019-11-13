@@ -32,9 +32,13 @@ public class CreatThousandsOfTroops : MonoBehaviour
     private Mesh _mesh;                     //实体渲染网格
     [SerializeField]
     private Material _material;             //实体渲染材质
+    //[SerializeField]
+    private GameObject goPrefab;
+    Entity entity;
 
     EntityManager entityManager;            //实体管理对象，用于创建实体原型（Archetype）和实体（Entity）
     EntityArchetype entityArchetype;        //实体原型对象
+    
 
     private void Start()
     {
@@ -47,6 +51,7 @@ public class CreatThousandsOfTroops : MonoBehaviour
             typeof(FloatingComponent),
             typeof(Translation),
             typeof(Rotation),
+            typeof(Scale),
             typeof(MoveForwardComponent),
             typeof(TimeToLiveComponent),
             typeof(IsDestroyComponent),
@@ -104,6 +109,10 @@ public class CreatThousandsOfTroops : MonoBehaviour
             {
                 value = 30f
             });
+            entityManager.SetComponentData(entityArr[i], new Scale
+            {
+                Value = 0.3f
+            });
             entityManager.SetComponentData(entityArr[i], new IsDestroyComponent
             {
                 value = false,
@@ -131,7 +140,69 @@ public class CreatThousandsOfTroops : MonoBehaviour
         //    CancelInvoke();
         //}
 
-        ShakeCamera.SetCameraShake(10f,0.2f,0.5f);
+        ShakeCamera.SetCameraShake(10f,0.1f,0.3f);
         //GameObject.Find("_script").GetComponent<ShakeCamera>().SetCameraShakeTime(10f);
+    }
+
+    public void SpawnEntityByHyBrid()
+    {
+        //参数检查
+        if (goPrefab == null)
+        {
+            Debug.Log(GetType() + "/Start()/空气墙预制体没有指定，请检查!");
+        }
+        
+        //创建实体的位置
+        float positionX = 0f;
+        float positionZ = 0f;
+        //初始化每个实体对象
+        for (int i = 0; i < 2; i++)
+        {
+            //将对象转化为Entity
+            entity = GameObjectConversionUtility.ConvertGameObjectHierarchy(
+                goPrefab,
+                World.Active);
+            //得到实体管理器
+            //entityManager = World.Active.EntityManager;
+            //从实体预设，大量克隆实体
+            Entity entityClone = entityManager.Instantiate(entity);
+            //实体管理器设置其中的组件参数
+            entityManager.AddComponentData(entityClone, new MoveSpeedComponent { value = moveSpeed });
+            entityManager.AddComponentData(entityClone, new MoveForwardComponent { });
+            float3 pos = new float3(
+                position.x + positionX - xNum / 2,
+                position.y + noise.cnoise(new float2(positionX, 1f) * UnityEngine.Random.Range(0f, 1f)),
+                position.z + positionZ);
+            entityManager.SetComponentData(entityClone, new Translation
+            {
+                Value = transform.TransformPoint(pos)
+            });
+            entityManager.AddComponentData(entityClone, new FloatingComponent
+            {
+                speed = floatingSpeed,
+                topBound = floatingTopBound,
+                bottomBound = floatingBottomBound,
+                floatingStartPosY = position.y
+            });
+            entityManager.SetComponentData(entityClone, new Rotation
+            {
+                Value = Quaternion.Euler(forwardVector)
+            });
+            entityManager.AddComponentData(entityClone, new TimeToLiveComponent
+            {
+                value = 30f
+            });
+            entityManager.AddComponentData(entityClone, new IsDestroyComponent
+            {
+                value = false,
+            });
+            positionX++;
+            if (positionX % xNum == 0)
+            {
+                positionX = 0f;
+                positionZ -= 1f;
+            }
+        }
+        ShakeCamera.SetCameraShake(10f, 0.2f, 0.5f);
     }
 }

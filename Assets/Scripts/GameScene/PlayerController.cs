@@ -84,20 +84,25 @@ public class PlayerController : MonoBehaviour
         }      
     }
 
-    //主角大招
-    public void LaunchThousandsOfTroops()
+    //Button触发主角释放大招动画
+    public void ButtonLaunchThousandsOfTroops()
     {
         //设置主角朝向，使其在移动过程中触发大招也能面向敌人
-        GetComponentInParent<Transform>().rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
-        //通过ECS生成大招所需的实体
-        GameObject.Find("_ECSscript").GetComponent<CreatThousandsOfTroops>().SpawnEntity();
+        GetComponentInParent<Transform>().rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         //设置Attack触发器，播放主角释放大招动画
         animator.SetTrigger("Attack");
         //主角释放大招的时候不可移动
         canMove = false;
-        Debug.Log("LaunchThousandsOfTroops");
+        Debug.Log("ButtonLaunchThousandsOfTroops");
     }
-
+    //动画中途释放主角大招
+    public void AnimLaunchThousandsOfTroops()
+    {
+        //通过ECS生成大招所需的实体
+        GameObject.Find("_ECSscript").GetComponent<CreatThousandsOfTroops>().SpawnEntity();
+        //GameObject.Find("_ECSscript").GetComponent<CreatThousandsOfTroops>().SpawnEntityByHyBrid();
+        Debug.Log("AnimLaunchThousandsOfTroops");
+    }
     //大招动画最后回调，设置主角为可移动
     public void SetCanMoveTrue()
     {
