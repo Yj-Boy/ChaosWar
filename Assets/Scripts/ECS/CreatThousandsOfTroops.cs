@@ -85,7 +85,9 @@ public class CreatThousandsOfTroops : MonoBehaviour
         //初始化每个实体对象
         for (int i = 0; i < entityArr.Length; i++)
         {
-            entityManager.SetComponentData(entityArr[i], new MoveSpeedComponent { value = moveSpeed });
+            entityManager.SetComponentData(entityArr[i], new MoveSpeedComponent {
+                value = moveSpeed
+            });
             float3 pos = new float3(
                 position.x + positionX - xNum / 2,
                 position.y + noise.cnoise(new float2(positionX, 1f) * UnityEngine.Random.Range(0f, 1f)),
@@ -111,7 +113,7 @@ public class CreatThousandsOfTroops : MonoBehaviour
             });
             entityManager.SetComponentData(entityArr[i], new Scale
             {
-                Value = 0.3f
+                Value = 0.5f
             });
             entityManager.SetComponentData(entityArr[i], new IsDestroyComponent
             {
@@ -122,7 +124,7 @@ public class CreatThousandsOfTroops : MonoBehaviour
                 mesh = _mesh,
                 material = _material
             });
-            positionX++;
+            positionX+=1.5f;
             if (positionX % xNum == 0)
             {
                 positionX = 0f;

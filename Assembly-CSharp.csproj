@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\ECS\TimeToLiveSystem.cs" />
     <Compile Include="Assets\Scripts\ECS\TroopsTagComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\WallTagComponent.cs" />
+    <Compile Include="Assets\Scripts\GameScene\BossController.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerController.cs" />
     <Compile Include="Assets\Scripts\StartScene\StartSceneUIController.cs" />
     <Reference Include="Unity.Timeline.Editor">

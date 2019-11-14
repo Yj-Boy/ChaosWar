@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
             //如果等于0，计算主角旋转角度，停止播放Walk动画
             else
             {
-                rotate.z = Mathf.LerpAngle(90, 0, 2);
+                rotate = new Vector3(-90, 0, 0);
                 animator.SetBool("Walk", false);
             }
             //将计算好的位置（pos）和角度（rotate）重新赋值给主角
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     public void ButtonLaunchThousandsOfTroops()
     {
         //设置主角朝向，使其在移动过程中触发大招也能面向敌人
-        GetComponentInParent<Transform>().rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        GetComponent<Transform>().parent.rotation = Quaternion.Euler(new Vector3(-90,0,0));
         //设置Attack触发器，播放主角释放大招动画
         animator.SetTrigger("Attack");
         //主角释放大招的时候不可移动

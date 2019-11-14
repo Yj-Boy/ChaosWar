@@ -39,6 +39,8 @@ public class CreateBossMainSkill : MonoBehaviour
     private int skillTime;          //生成实体的次数
     private int times;              //累计生成实体的次数
 
+    private bool isLaunch;          //是否生成
+
     [SerializeField]
     private Mesh _mesh;             //渲染实体的网格
     [SerializeField]
@@ -49,17 +51,31 @@ public class CreateBossMainSkill : MonoBehaviour
     {
         entityManager = World.Active.EntityManager;
         times = 0;
+        isLaunch = false;
     }
 
     private void Update()
     {
-        spawnTmpTime += spawnSpeed * Time.deltaTime;
-        if(times<skillTime&&spawnTmpTime>=spawnTime)
+        if(isLaunch==true)
         {
-            Spawn();
-            spawnTmpTime = 0;
-            times++;
-        }
+            spawnTmpTime += spawnSpeed * Time.deltaTime;
+            if (times < skillTime && spawnTmpTime >= spawnTime)
+            {
+                Spawn();
+                spawnTmpTime = 0;
+                times++;
+            }
+        }      
+    }
+
+    public void Launch()
+    {
+        isLaunch = true;
+    }
+
+    public void Stop()
+    {
+        isLaunch = false;
     }
 
     private void Spawn()
