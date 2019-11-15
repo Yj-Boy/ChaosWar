@@ -22,6 +22,7 @@ public class CreateBossMainSkill : MonoBehaviour
     [SerializeField]
     private float radius;           //技能圆柱体半径
     [SerializeField]
+    private Transform bossTrans;    //Boss位置
     private float3 position;        //技能位置
     private float3 pos;             //每个实体的具体位置
     [SerializeField]
@@ -37,9 +38,9 @@ public class CreateBossMainSkill : MonoBehaviour
     
     [SerializeField]
     private int skillTime;          //生成实体的次数
-    private int times;              //累计生成实体的次数
+    private static int times;              //累计生成实体的次数
 
-    private bool isLaunch;          //是否生成
+    private static bool isLaunch;          //是否生成
 
     [SerializeField]
     private Mesh _mesh;             //渲染实体的网格
@@ -52,6 +53,7 @@ public class CreateBossMainSkill : MonoBehaviour
         entityManager = World.Active.EntityManager;
         times = 0;
         isLaunch = false;
+        position = bossTrans.position;
     }
 
     private void Update()
@@ -68,14 +70,20 @@ public class CreateBossMainSkill : MonoBehaviour
         }      
     }
 
-    public void Launch()
+    public static void Launch()
     {
         isLaunch = true;
+        times = 0;
     }
 
-    public void Stop()
+    public static void Stop()
     {
         isLaunch = false;
+    }
+
+    public static bool GetLaunch()
+    {
+        return isLaunch;
     }
 
     private void Spawn()
