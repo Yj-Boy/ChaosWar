@@ -39,13 +39,15 @@ public class BossController : MonoBehaviour
         //释放大招动画
         //大招动画完触发大招
 
-        if (CreateBossMainSkill.GetLaunch())
+        if (GameObject.Find("_ECSscript").GetComponent<CreateBossMainSkill>().GetLaunch())
         {
             tmpSkillTime += Time.deltaTime;
             if(tmpSkillTime>continueSkillTime)
             {
-                CreateBossMainSkill.Stop();
+                //CreateBossMainSkill.Stop();
+                GameObject.Find("_ECSscript").GetComponent<CreateBossMainSkill>().Stop();
                 bossAnimator.SetBool("BackBossAttack", true);
+                bossAnimator.SetBool("BossAttack", false);
                 tmpSkillTime = 0f;
                 Debug.Log("BossAttackFalse");
             }
@@ -58,7 +60,8 @@ public class BossController : MonoBehaviour
         if(rangeNum>0&&rangeNum<=30)
         {
             bossAnimator.SetBool("BossAttack", true);
-            CreateBossMainSkill.Launch();
+            //CreateBossMainSkill.Launch();
+            GameObject.Find("_ECSscript").GetComponent<CreateBossMainSkill>().Launch();
             Debug.Log("MainSkillLaunch!");
         }
     }

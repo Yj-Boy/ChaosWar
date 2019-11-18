@@ -38,9 +38,9 @@ public class CreateBossMainSkill : MonoBehaviour
     
     [SerializeField]
     private int skillTime;          //生成实体的次数
-    private static int times;              //累计生成实体的次数
+    private int times;              //累计生成实体的次数
 
-    private static bool isLaunch;          //是否生成
+    private bool isLaunch;          //是否生成
 
     [SerializeField]
     private Mesh _mesh;             //渲染实体的网格
@@ -54,6 +54,7 @@ public class CreateBossMainSkill : MonoBehaviour
         times = 0;
         isLaunch = false;
         position = bossTrans.position;
+        position.y += 10;
     }
 
     private void Update()
@@ -70,18 +71,19 @@ public class CreateBossMainSkill : MonoBehaviour
         }      
     }
 
-    public static void Launch()
+    public void Launch()
     {
         isLaunch = true;
         times = 0;
+        Debug.Log("CreateBossMainSkill/Launch==="+"isLaunch:"+isLaunch+"===times:"+times);
     }
 
-    public static void Stop()
+    public void Stop()
     {
         isLaunch = false;
     }
 
-    public static bool GetLaunch()
+    public bool GetLaunch()
     {
         return isLaunch;
     }
@@ -107,8 +109,8 @@ public class CreateBossMainSkill : MonoBehaviour
         {
             float r = UnityEngine.Random.Range(-radius, radius);
             pos.x = position.x + r * math.cos(UnityEngine.Random.Range(0, 360) * math.PI / 180);
-            pos.y = position.z + r * math.sin(UnityEngine.Random.Range(0, 360) * math.PI / 180);
-            pos.z = UnityEngine.Random.Range(-radius, radius);
+            pos.y = position.y + r * math.sin(UnityEngine.Random.Range(0, 360) * math.PI / 180);
+            pos.z = position.z+UnityEngine.Random.Range(-radius, radius);
             entityManager.SetComponentData(entityArr[i], new Translation
             {
                 Value = pos
