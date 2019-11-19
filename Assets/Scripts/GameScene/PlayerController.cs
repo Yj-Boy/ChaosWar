@@ -37,6 +37,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         MoveHero();
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            ButtonLaunchThousandsOfTroops();
+        }
     }
 
     //主角移动方法

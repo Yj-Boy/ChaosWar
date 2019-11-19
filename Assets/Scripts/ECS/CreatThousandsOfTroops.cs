@@ -7,6 +7,7 @@ using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
 using Unity.Rendering;
+using System.Collections;
 using System;
 
 public class CreatThousandsOfTroops : MonoBehaviour
@@ -38,7 +39,9 @@ public class CreatThousandsOfTroops : MonoBehaviour
 
     EntityManager entityManager;            //实体管理对象，用于创建实体原型（Archetype）和实体（Entity）
     EntityArchetype entityArchetype;        //实体原型对象
-    
+
+    public GameObject goDustTrail;          //烟尘粒子
+    public Transform goTrans;               //烟尘位置
 
     private void Start()
     {
@@ -142,8 +145,11 @@ public class CreatThousandsOfTroops : MonoBehaviour
         //    CancelInvoke();
         //}
 
-        ShakeCamera.SetCameraShake(10f,0.1f,0.3f);
+        ShakeCamera.SetCameraShake(2.8f,0.1f,0.3f);
         //GameObject.Find("_script").GetComponent<ShakeCamera>().SetCameraShakeTime(10f);
+
+        //添加尾部烟尘效果
+        CreateDustTrail();
     }
 
     public void SpawnEntityByHyBrid()
@@ -205,6 +211,14 @@ public class CreatThousandsOfTroops : MonoBehaviour
                 positionZ -= 1f;
             }
         }
-        ShakeCamera.SetCameraShake(10f, 0.2f, 0.5f);
+        ShakeCamera.SetCameraShake(4f, 0.2f, 0.5f);
+    }
+
+    private void CreateDustTrail()
+    {
+        Vector3 pos = goTrans.position;
+        pos.z = -88;
+        goTrans.position= pos;
+        Instantiate(goDustTrail, goTrans);
     }
 }

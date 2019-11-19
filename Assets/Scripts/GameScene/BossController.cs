@@ -1,30 +1,27 @@
-﻿using System.Collections;
+﻿/*
+ *  Boss控制脚本 
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum SkillState
-{
-    normal,
-    launching
-};
 public class BossController : MonoBehaviour
 {
-    public Animator bossAnimator;
-    public float mainSkillTime;
-    public float continueSkillTime;
-    private float tmpSkillTime;
-    private SkillState skillState;
+    public Animator bossAnimator;           //Boss状态机
+    public float mainSkillTime;             //Boss大招释放到结束总时间
+    private float tmpSkillTime;             //Boss大招释放开始累计时间
 
     // Start is called before the first frame update
     void Start()
     {
+        //参数检查
         if(bossAnimator==null)
         {
             Debug.Log(GetType() + "/Start/Boss状态机BossAnimator没有指定！");
         }
-        if(mainSkillTime==0f)
+        if(mainSkillTime == 0f)
         {
-            Debug.Log(GetType() + "/Start/Boss大招时间mainSkillTime没有设定或者为0！");
+            Debug.Log(GetType() + "/Start/Boss大招时间MainSkillTime没有设定或者为0！");
         }
 
         tmpSkillTime = 0f;
@@ -33,16 +30,10 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //mainSkillTime += Time.deltaTime;
-        //到达释放大招的时间和条件
-
-        //释放大招动画
-        //大招动画完触发大招
-
         if (GameObject.Find("_ECSscript").GetComponent<CreateBossMainSkill>().GetLaunch())
         {
             tmpSkillTime += Time.deltaTime;
-            if(tmpSkillTime>continueSkillTime)
+            if(tmpSkillTime>mainSkillTime)
             {
                 //CreateBossMainSkill.Stop();
                 GameObject.Find("_ECSscript").GetComponent<CreateBossMainSkill>().Stop();
