@@ -42,6 +42,7 @@ public class CreatThousandsOfTroops : MonoBehaviour
 
     public GameObject goDustTrail;          //烟尘粒子
     public Transform goTrans;               //烟尘位置
+    public GameObject goLithtEffect;        //生成大招光效
 
     private void Start()
     {
@@ -148,8 +149,23 @@ public class CreatThousandsOfTroops : MonoBehaviour
         ShakeCamera.SetCameraShake(2.8f,0.1f,0.3f);
         //GameObject.Find("_script").GetComponent<ShakeCamera>().SetCameraShakeTime(10f);
 
-        //添加尾部烟尘效果
+        //添加烟尘效果     
         CreateDustTrail();
+        //添加光效
+        CreateLightEffect();
+    }
+
+    private void CreateDustTrail()
+    {    
+        //Vector3 pos = goTrans.position; 
+        //pos.z = -88;
+        //goTrans.position = pos;
+        Instantiate(goDustTrail, goTrans);
+    }
+
+    private void CreateLightEffect()
+    {
+        Instantiate(goLithtEffect, goLithtEffect.transform);
     }
 
     public void SpawnEntityByHyBrid()
@@ -212,13 +228,5 @@ public class CreatThousandsOfTroops : MonoBehaviour
             }
         }
         ShakeCamera.SetCameraShake(4f, 0.2f, 0.5f);
-    }
-
-    private void CreateDustTrail()
-    {
-        Vector3 pos = goTrans.position;
-        pos.z = -88;
-        goTrans.position= pos;
-        Instantiate(goDustTrail, goTrans);
     }
 }

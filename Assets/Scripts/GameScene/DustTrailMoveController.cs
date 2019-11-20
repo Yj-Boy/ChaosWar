@@ -25,7 +25,7 @@ public class DustTrailMoveController : MonoBehaviour
         liveTime -= Time.deltaTime;
         if(liveTime<=0)
         {
-            Object.Destroy(this);
+            Object.Destroy(this.gameObject);
         }
     }
 }
