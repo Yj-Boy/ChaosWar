@@ -65,8 +65,8 @@
     <Compile Include="Assets\Scripts\Currency\Progressbar.cs" />
     <Compile Include="Assets\Scripts\Currency\ShakeCamera.cs" />
     <Compile Include="Assets\Scripts\ECS\CollisionSystem.cs" />
+    <Compile Include="Assets\Scripts\ECS\CreateAsteroid.cs" />
     <Compile Include="Assets\Scripts\ECS\CreateBossMainSkill.cs" />
-    <Compile Include="Assets\Scripts\ECS\CreateEnemyBesideBoss.cs" />
     <Compile Include="Assets\Scripts\ECS\CreateEnemyRotateByBoss.cs" />
     <Compile Include="Assets\Scripts\ECS\CreateRotateCube.cs" />
     <Compile Include="Assets\Scripts\ECS\CreateWallToDestroy.cs" />
