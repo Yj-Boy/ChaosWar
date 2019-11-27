@@ -87,8 +87,8 @@
     <Compile Include="Assets\Scripts\ECS\TroopsTagComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\WallTagComponent.cs" />
     <Compile Include="Assets\Scripts\GameScene\BossController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\DustTrailMoveController.cs" />
     <Compile Include="Assets\Scripts\GameScene\FlagMoveController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\GOMoveAndDestroy.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerController.cs" />
     <Compile Include="Assets\Scripts\GameScene\TimeToDestroyGO.cs" />
     <Compile Include="Assets\Scripts\StartScene\StartSceneUIController.cs" />

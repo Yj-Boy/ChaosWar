@@ -43,6 +43,7 @@ public class CreatThousandsOfTroops : MonoBehaviour
     public GameObject goDustTrail;          //烟尘粒子
     public Transform goTrans;               //烟尘位置
     public GameObject goLithtEffect;        //生成大招光效
+    public Transform goLightTrans;         //生成大招光效位置
 
     private void Start()
     {
@@ -165,7 +166,7 @@ public class CreatThousandsOfTroops : MonoBehaviour
 
     private void CreateLightEffect()
     {
-        Instantiate(goLithtEffect, goLithtEffect.transform);
+        Instantiate(goLithtEffect, goLightTrans);
     }
 
     public void SpawnEntityByHyBrid()

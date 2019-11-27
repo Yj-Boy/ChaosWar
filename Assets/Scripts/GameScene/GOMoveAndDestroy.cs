@@ -1,20 +1,20 @@
 ﻿/*
- *  大招的烟尘跟进效果 
+ *  对象移动并在一定时间后自动销毁脚本 
  */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DustTrailMoveController : MonoBehaviour
+public class GOMoveAndDestroy : MonoBehaviour
 {
-    public float speed;             //烟尘跟进速度
-    public float liveTime;          //烟尘存在时间
+    public float speed;             //对象移动速度
+    public float liveTime;          //对象存在时间
 
-    private Vector3 position;       //烟尘生成位置（大招尾部）
+    private Vector3 position;       //对象的初始位置
 
     private void Start()
     {
-        position = transform.position;
+        position = transform.position;      
     }
     // Update is called once per frame
     void Update()

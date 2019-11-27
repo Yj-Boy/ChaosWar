@@ -44,6 +44,17 @@ public class BossController : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("OnTriggerEnter:boss");
+        bossAnimator.SetTrigger("BossHurt");
+    }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    Debug.Log("OnCollisionEnter:boss");
+    //    bossAnimator.SetBool("BossHurt", true);
+    //}
 
     void LaunchBossMainSkill()
     {
