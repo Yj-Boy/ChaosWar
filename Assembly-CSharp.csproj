@@ -87,10 +87,16 @@
     <Compile Include="Assets\Scripts\ECS\TroopsTagComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\WallTagComponent.cs" />
     <Compile Include="Assets\Scripts\GameScene\BossController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\EnemyAttack.cs" />
+    <Compile Include="Assets\Scripts\GameScene\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\EnemyHealth.cs" />
+    <Compile Include="Assets\Scripts\GameScene\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\GameScene\EnemyMoveTarget.cs" />
     <Compile Include="Assets\Scripts\GameScene\FlagMoveController.cs" />
     <Compile Include="Assets\Scripts\GameScene\GOMoveAndDestroy.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerController.cs" />
     <Compile Include="Assets\Scripts\GameScene\TimeToDestroyGO.cs" />
+    <Compile Include="Assets\Scripts\GameScene\TroopsHealth.cs" />
     <Compile Include="Assets\Scripts\StartScene\StartSceneUIController.cs" />
     <None Include="Assets\StoneKeep\Readme.txt" />
     <Reference Include="Unity.Timeline.Editor">
