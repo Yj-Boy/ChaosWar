@@ -7,6 +7,7 @@ TagManager:
   - Interact
   - CollideCube
   - Troop
+  - TroopShooter
   layers:
   - Default
   - TransparentFX

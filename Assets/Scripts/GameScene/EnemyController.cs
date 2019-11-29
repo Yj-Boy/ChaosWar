@@ -23,6 +23,27 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GetComponent<EnemyAttack>().GetTroopsNum()!=0
+            &&GetComponent<EnemyShoot>().GetTroopShooterNum()!=0)
+        {
+            enemyState = EnemyState.attack;
+        }
+        else if(GetComponent<EnemyAttack>().GetTroopsNum() != 0
+            && GetComponent<EnemyShoot>().GetTroopShooterNum() == 0)
+        {
+            enemyState = EnemyState.attack;
+        }
+        else if (GetComponent<EnemyAttack>().GetTroopsNum() == 0
+            && GetComponent<EnemyShoot>().GetTroopShooterNum() != 0)
+        {
+            enemyState = EnemyState.shoot;
+        }
+        else if (GetComponent<EnemyAttack>().GetTroopsNum() == 0
+            && GetComponent<EnemyShoot>().GetTroopShooterNum() == 0)
+        {
+            enemyState = EnemyState.move;
+        }
+
         switch (enemyState)
         {
             case EnemyState.move:
@@ -32,7 +53,13 @@ public class EnemyController : MonoBehaviour
                 GetComponent<EnemyAttack>().Attack();
                 break;
             case EnemyState.shoot:
+                GetComponent<EnemyShoot>().Shoot();
                 break;
+        }
+
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            GetState();
         }
     }
 

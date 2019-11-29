@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\GameScene\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\GameScene\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\GameScene\EnemyMoveTarget.cs" />
+    <Compile Include="Assets\Scripts\GameScene\EnemyShoot.cs" />
     <Compile Include="Assets\Scripts\GameScene\FlagMoveController.cs" />
     <Compile Include="Assets\Scripts\GameScene\GOMoveAndDestroy.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerController.cs" />
