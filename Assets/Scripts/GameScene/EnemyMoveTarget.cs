@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+ *  enemy移动目标点接口 
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

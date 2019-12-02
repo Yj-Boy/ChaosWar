@@ -1,40 +1,33 @@
-﻿using System.Collections;
+﻿/*
+ *  enemy进攻脚本
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAttack : MonoBehaviour
 {
-    private Vector3 pos;
-    private Transform troops;
-    private Transform targetTroop;
-    private int troopsNum;
-    private int index;
+    public float timeBetweenAttack;         //进攻时间间隔
 
-    NavMeshAgent nav;
+    private Transform troops;               //攻击目标的父对象
+    private Transform targetTroop;          //当前攻击目标
+    private int troopsNum;                  //攻击目标的总数量
+    private int index;                      //当前攻击目标的索引
+    private float timer;                    //累计到攻击时间间隔的变量
+
+    NavMeshAgent nav;                       //NavMeshAgent对象
     // Start is called before the first frame update
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
         troops = GameObject.Find("Troops").transform;
+        timer = timeBetweenAttack;
     }
 
     private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-        //    Debug.Log(troopsNum);
-        //}
-        troopsNum = troops.childCount;
-        //if (troopsNum==0)
-        //{
-        //    GetComponent<EnemyController>().SetState(EnemyState.move.ToString());
-        //    return;
-        //}
-        //else
-        //{
-        //    GetComponent<EnemyController>().SetState(EnemyState.attack.ToString());
-        //}   
+    {     
+        troopsNum = troops.childCount; 
     }
 
     public int GetTroopsNum()
@@ -75,38 +68,65 @@ public class EnemyAttack : MonoBehaviour
     public void Attack()
     {
         //如果攻击对象生命值大于0
-        //nav.SetDestination(pos);
-
+        
+        //如果攻击目标的数量大于0
         if (troopsNum > 0)
         {
+            //如果当前攻击目标为空，则随机从攻击对象中赋予一个给当前攻击目标
             if(targetTroop == null)
             {
-                //int tmpIndex = index;
-                //do
-                //{
-                //    index = Random.Range(0, troopsNum);
-                //} while (tmpIndex == index);
                 index = Random.Range(0, troopsNum);
                 targetTroop = troops.GetChild(index);
             }
             else if (targetTroop != null)
             {
-                nav.SetDestination(targetTroop.position);
+                //若不为空，则攻击当前对象
+                GetComponent<Animator>().SetBool("DevilHeadMove", true);
+                
+                //若与攻击目标的距离小于某个值，则攻击，否则移动
                 if ((transform.position - targetTroop.position).sqrMagnitude < 14)
                 {
-                    targetTroop.GetComponent<TroopsHealth>().TakeDamage(20);
+                    //nav.updatePosition = false;
+                    //nav.updateRotation = false;
+
+                    //累计时间，若大于攻击时间间隔，则攻击
+                    timer += Time.deltaTime;
+                    if (timer >= timeBetweenAttack&& targetTroop.GetComponent<TroopsHealth>().currentHealth >0)
+                    {
+                        GetComponent<Animator>().SetTrigger("DevilHeadAttack");                    
+                    }
+                    
+                    //若攻击对象的血量小于0，则将当前攻击对象设置为空
                     if (targetTroop.GetComponent<TroopsHealth>().currentHealth <= 0)
                     {
                         //GetComponent<EnemyController>().SetState(EnemyState.move.ToString());
                         targetTroop = null;
                     }
                 }
+                else
+                {
+                    nav.SetDestination(targetTroop.position);
+                    //nav.updatePosition = true;
+                    //nav.updateRotation = true;
+                    //nav.enabled = false;
+                    //transform.rotation = Quaternion.Slerp(
+                    //    transform.rotation,
+                    //    Quaternion.LookRotation(targetTroop.position - transform.position),
+                    //    Time.deltaTime);
+                    //transform.position = Vector3.Lerp(
+                    //    transform.position,
+                    //    targetTroop.position,
+                    //    Time.deltaTime
+                    //    );
+                }
             }
         }   
     }
 
-    public void ResetPos()
+    //动画中触发真实伤害接口
+    public void AttackTakeDamage()
     {
-        pos = new Vector3(0,0,0);
+        targetTroop.GetComponent<TroopsHealth>().TakeDamage(20);
+        timer = 0f;
     }
 }

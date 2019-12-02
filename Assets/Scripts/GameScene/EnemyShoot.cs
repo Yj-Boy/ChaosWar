@@ -1,24 +1,23 @@
-﻿using System.Collections;
+﻿/*
+ *  enemy射击脚本 
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyShoot : MonoBehaviour
 {
-    public float timeBetweenAttack = 0.5f;
+    public float timeBetweenAttack;                 //射击的时间间隔
+                   
+    private Transform troopShooter;                 //射击目标的父对象
+    private Transform targetTroopShooter;           //射击目标
+    private int troopShooterNum;                    //射击目标数量
+    private int index;                              //射击目标索引
+    private float timer;                            //距离射击间隔的时间
 
-    private Vector3 pos;
-    private Transform troopShooter;
-    private Transform targetTroopShooter;
-    private int troopShooterNum;
-    private int index;
-    private float timer;
-
-    //NavMeshAgent nav;
     // Start is called before the first frame update
     void Start()
     {
-        //nav = GetComponent<NavMeshAgent>();
         troopShooter = GameObject.Find("TroopShooter").transform;
     }
 
@@ -26,66 +25,55 @@ public class EnemyShoot : MonoBehaviour
     void Update()
     {
         troopShooterNum = troopShooter.childCount;
-        //if (troopShooterNum == 0)
-        //{
-        //    GetComponent<EnemyController>().SetState(EnemyState.move.ToString());
-        //    return;
-        //}
-        //else
-        //{
-        //    GetComponent<EnemyController>().SetState(EnemyState.shoot.ToString());
-        //}
     }
 
+    //获得射击目标数量公有接口
     public int GetTroopShooterNum()
     {
         return troopShooterNum;
     }
 
+    //射击接口
     public void Shoot()
     {
-        //如果攻击对象生命值大于0
-        //nav.SetDestination(pos);
-
-        timer += Time.deltaTime;
-        if(timer>=timeBetweenAttack)
+        //如果射击目标数量大于0
+        if (troopShooterNum > 0)
         {
-            timer = 0f;
-            if (troopShooterNum > 0)
+            //如果当前射击目标为空，随机从射击目标对象中赋予一个射击目标
+            if (targetTroopShooter == null)
+            {   
+                index = Random.Range(0, troopShooterNum);
+                targetTroopShooter = troopShooter.GetChild(index);
+            }
+            else if (targetTroopShooter != null)
             {
-                if (targetTroopShooter == null)
-                {
-                    //int tmpIndex = index;
-                    //do
-                    //{
-                    //    index = Random.Range(0, troopShooterNum);
-                    //} while (tmpIndex == index);
-                    index = Random.Range(0, troopShooterNum);
-                    targetTroopShooter = troopShooter.GetChild(index);
-                }
-                else if (targetTroopShooter != null)
-                {
-                    //transform.LookAt(targetTroopShooter);
-                    Quaternion targetRotation = Quaternion.LookRotation(targetTroopShooter.position - transform.position, Vector3.up);
-                    transform.rotation = Quaternion.Slerp(
-                        transform.rotation,
-                        targetRotation,
-                        //targetTroopShooter.rotation,
-                        2.5f * Time.deltaTime);
+                //若当前射击目标不为空，将enemy旋转至朝向射击目标
+                Quaternion targetRotation = Quaternion.LookRotation(
+                    targetTroopShooter.position-transform.position);
+                //Debug.Log("targetRotation:" + targetRotation);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    targetRotation,
+                    1.5f * Time.deltaTime);
+                //Debug.Log("transform.rotation:" + transform.rotation);
 
-                    //transform.localEulerAngles = Vector3.Lerp(transform.localEulerAngles, 
-                    //    targetTroopShooter.position,
-                    //    Time.deltaTime * 2);
+                //累计timer，若大于射击间隔，进行一次射击并造成伤害
+                timer += Time.deltaTime;
+                if (timer >= timeBetweenAttack)
+                {
+                    timer = 0f;
                     targetTroopShooter.GetComponent<TroopsHealth>().TakeDamage(20);
+                    GetComponent<Animator>().SetTrigger("DevilHeadShoot");
 
+                    //如果射击目标的血量小于0，则将当前射击目标设置为空
                     if (targetTroopShooter.GetComponent<TroopsHealth>().currentHealth <= 0)
                     {
-                        //GetComponent<EnemyController>().SetState(EnemyState.move.ToString());
                         targetTroopShooter = null;
                     }
-                }
+                }          
             }
         }
-        
+
+
     }
 }

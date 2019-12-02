@@ -1,18 +1,62 @@
-﻿using System.Collections;
+﻿/*
+ *  enemy血量脚本 
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int startingHealth;          //enemy血量
+    public int currentHealth;           //enemy血量中间值，用于运算
+
+    bool isDead;                        //是否死亡
+    bool isDark;                        //是否下沉
+
+    private void Awake()
     {
-        
+        currentHealth = startingHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        //测试用，以后删除
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            TekeDamage(40);
+        }
+    }
+
+    //受伤害公共接口
+    public void TekeDamage(int amount)
+    {
+        if(isDead)
+        {
+            return;
+        }
+
+        currentHealth -= amount;
         
+        if(currentHealth<=0)
+        {
+            Death();
+        }
+    }
+
+    //死亡接口
+    private void Death()
+    {
+        isDead = true;
+        GetComponent<SphereCollider>().isTrigger = true;
+        GetComponent<Animator>().SetTrigger("DevilHeadDown");
+    }
+
+    //暗化销毁接口
+    public void StartDark()
+    {
+        GetComponent<NavMeshAgent>().enabled = false;
+        isDark = true;
+        Destroy(gameObject, 1.5f);
     }
 }
