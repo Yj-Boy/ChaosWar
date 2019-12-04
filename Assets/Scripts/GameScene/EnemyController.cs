@@ -4,6 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 //enemy状态
 enum EnemyState
@@ -19,11 +20,14 @@ public class EnemyController : MonoBehaviour
 {
     EnemyState enemyState;      //enemy状态对象
 
+    NavMeshAgent nav;
+
     // Start is called before the first frame update
     void Start()
     {
         //初始化enemy的状态为move
         enemyState = EnemyState.move;
+        nav = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -67,14 +71,18 @@ public class EnemyController : MonoBehaviour
         {
             //移动状态下，调用移动脚本的move方法
             case EnemyState.move:
+                //nav.enabled = true;
                 GetComponent<EnemyMovement>().Move();
                 break;
             //攻击状态下，调用攻击脚本的attack方法
             case EnemyState.attack:
+                //nav.enabled = true;
                 GetComponent<EnemyAttack>().Attack();
                 break;
             //射击状态下，调用射击脚本的shoot方法
             case EnemyState.shoot:
+                //nav.enabled = false;
+                //nav.enabled = true;
                 GetComponent<EnemyShoot>().Shoot();
                 break;
             //死亡状态下，什么都不做

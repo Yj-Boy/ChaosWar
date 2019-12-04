@@ -9,6 +9,7 @@ using UnityEngine.AI;
 public class EnemyAttack : MonoBehaviour
 {
     public float timeBetweenAttack;         //进攻时间间隔
+    public ParticleSystem attackParticles;  //攻击粒子特效
 
     private Transform troops;               //攻击目标的父对象
     private Transform targetTroop;          //当前攻击目标
@@ -22,7 +23,6 @@ public class EnemyAttack : MonoBehaviour
     {
         nav = GetComponent<NavMeshAgent>();
         troops = GameObject.Find("Troops").transform;
-        timer = timeBetweenAttack;
     }
 
     private void Update()
@@ -127,6 +127,7 @@ public class EnemyAttack : MonoBehaviour
     public void AttackTakeDamage()
     {
         targetTroop.GetComponent<TroopsHealth>().TakeDamage(20);
+        attackParticles.Play();
         timer = 0f;
     }
 }
