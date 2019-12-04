@@ -22,53 +22,66 @@ public class EnemyController : MonoBehaviour
 
     NavMeshAgent nav;
 
+    Vector3 moveUpTarget;
+
     // Start is called before the first frame update
     void Start()
     {
         //初始化enemy的状态为move
-        enemyState = EnemyState.move;
+        enemyState = EnemyState.normal;
         nav = GetComponent<NavMeshAgent>();
+
+        moveUpTarget = transform.position;
+        moveUpTarget.y += 2.7f;
+        Debug.Log("moveUpTarget.y:" + moveUpTarget.y);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //若enemy的血量小于0，将enemy的状态切换为death
-        if(GetComponent<EnemyHealth>().currentHealth<=0)
+        if(enemyState!=EnemyState.normal)
         {
-            enemyState = EnemyState.death;
-        }
-        else
-        {
-            //若场上同时有攻击目标也有射击目标，优先进行攻击
-            if (GetComponent<EnemyAttack>().GetTroopsNum() != 0
-            && GetComponent<EnemyShoot>().GetTroopShooterNum() != 0)
+            //若enemy的血量小于0，将enemy的状态切换为death
+            if (GetComponent<EnemyHealth>().currentHealth <= 0)
             {
-                enemyState = EnemyState.attack;
+                enemyState = EnemyState.death;
             }
-            //若只有攻击目标，没有射击目标，转为射击状态
-            else if (GetComponent<EnemyAttack>().GetTroopsNum() != 0
-                && GetComponent<EnemyShoot>().GetTroopShooterNum() == 0)
+            else
             {
-                enemyState = EnemyState.attack;
-            }
-            //若只有射击目标，没有攻击目标，则转为攻击状态
-            else if (GetComponent<EnemyAttack>().GetTroopsNum() == 0
+                //若场上同时有攻击目标也有射击目标，优先进行攻击
+                if (GetComponent<EnemyAttack>().GetTroopsNum() != 0
                 && GetComponent<EnemyShoot>().GetTroopShooterNum() != 0)
-            {
-                enemyState = EnemyState.shoot;
-            }
-            //若没有攻击目标，也没有射击目标，则转为移动状态
-            else if (GetComponent<EnemyAttack>().GetTroopsNum() == 0
-                && GetComponent<EnemyShoot>().GetTroopShooterNum() == 0)
-            {
-                enemyState = EnemyState.move;
+                {
+                    enemyState = EnemyState.attack;
+                }
+                //若只有攻击目标，没有射击目标，转为射击状态
+                else if (GetComponent<EnemyAttack>().GetTroopsNum() != 0
+                    && GetComponent<EnemyShoot>().GetTroopShooterNum() == 0)
+                {
+                    enemyState = EnemyState.attack;
+                }
+                //若只有射击目标，没有攻击目标，则转为攻击状态
+                else if (GetComponent<EnemyAttack>().GetTroopsNum() == 0
+                    && GetComponent<EnemyShoot>().GetTroopShooterNum() != 0)
+                {
+                    enemyState = EnemyState.shoot;
+                }
+                //若没有攻击目标，也没有射击目标，则转为移动状态
+                else if (GetComponent<EnemyAttack>().GetTroopsNum() == 0
+                    && GetComponent<EnemyShoot>().GetTroopShooterNum() == 0)
+                {
+                    enemyState = EnemyState.move;
+                }
             }
         }
+        
         
 
         switch (enemyState)
         {
+            case EnemyState.normal:
+                EnemyMoveUp();
+                break;
             //移动状态下，调用移动脚本的move方法
             case EnemyState.move:
                 //nav.enabled = true;
@@ -122,6 +135,20 @@ public class EnemyController : MonoBehaviour
             case "shoot":
                 enemyState = EnemyState.shoot;
                 break;
+        }
+    }
+
+    private void EnemyMoveUp()
+    {
+        transform.position = Vector3.Lerp(
+            transform.position,
+            moveUpTarget,
+            0.8f * Time.deltaTime
+            );
+        if(transform.position.y>=moveUpTarget.y)
+        {
+            nav.enabled = true;
+            enemyState = EnemyState.move;
         }
     }
 }

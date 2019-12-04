@@ -111,6 +111,7 @@
     <Compile Include="Assets\Scripts\GameScene\FlagMoveController.cs" />
     <Compile Include="Assets\Scripts\GameScene\GOMoveAndDestroy.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\SpawnDevilHead.cs" />
     <Compile Include="Assets\Scripts\GameScene\TimeToDestroyGO.cs" />
     <Compile Include="Assets\Scripts\GameScene\TroopsHealth.cs" />
     <Compile Include="Assets\Scripts\StartScene\StartSceneUIController.cs" />

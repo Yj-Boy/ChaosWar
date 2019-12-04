@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth;          //enemy血量
     public int currentHealth;           //enemy血量中间值，用于运算
+    public ParticleSystem deathParticle;//死亡特效
 
     bool isDead;                        //是否死亡
     bool isDark;                        //是否下沉
@@ -17,6 +18,7 @@ public class EnemyHealth : MonoBehaviour
     private void Awake()
     {
         currentHealth = startingHealth;
+        deathParticle.Stop();
     }
 
     private void Update()
@@ -52,11 +54,17 @@ public class EnemyHealth : MonoBehaviour
         GetComponent<Animator>().SetTrigger("DevilHeadDown");
     }
 
-    //暗化销毁接口
+    //暗化接口
     public void StartDark()
     {
         GetComponent<NavMeshAgent>().enabled = false;
         isDark = true;
-        Destroy(gameObject, 1.5f);
+        Destroy(gameObject, 3f);
+    }
+
+    //销毁跟生成气雾接口
+    public void DeathParticle()
+    {
+        deathParticle.Play();
     }
 }
