@@ -47,7 +47,7 @@ public class TroopsHealth : MonoBehaviour
         //死亡效果
         //GetComponent<Animation>().Play();
         transform.SetParent(null);
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 5f);
     }
 
     //销毁接口
