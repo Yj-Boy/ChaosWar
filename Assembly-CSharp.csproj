@@ -116,6 +116,7 @@
     <Compile Include="Assets\Scripts\GameScene\Troop\SwordColllision.cs" />
     <Compile Include="Assets\Scripts\GameScene\Troop\TroopsController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Troop\TroopsHealth.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Troop\TroopShooterController.cs" />
     <Compile Include="Assets\Scripts\StartScene\StartSceneUIController.cs" />
     <None Include="Assets\Particle Attractor by Moonflower Carnivore\Shaders\Particles Additive Intensify.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
