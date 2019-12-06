@@ -8,6 +8,7 @@ TagManager:
   - CollideCube
   - Troop
   - TroopShooter
+  - Enemy
   layers:
   - Default
   - TransparentFX

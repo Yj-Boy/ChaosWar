@@ -28,6 +28,10 @@ public class EnemyHealth : MonoBehaviour
         {
             TekeDamage(40);
         }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Destroy(gameObject);
+        }
     }
 
     //受伤害公共接口

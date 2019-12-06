@@ -27,6 +27,8 @@ public class TroopsController : MonoBehaviour
     public float runAngleRange;         //对象旋转至可以奔跑的角度
     public float timeBetweenAttack;     //对象攻击的时间间隔
 
+    public CapsuleCollider swordCollider; //剑的碰撞脚本
+
     private int devilHeadIndex;         //攻击对象的索引
 
     private float timer;                //距离上一次攻击时间间隔的时间
@@ -57,6 +59,8 @@ public class TroopsController : MonoBehaviour
         transform.localScale = new Vector3(0, 0, 0);
         //在0.5s后生成对象
         Invoke("Spawn", 0.5f);
+        //初始关闭剑的碰撞脚本
+        swordCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -145,7 +149,7 @@ public class TroopsController : MonoBehaviour
         animator.SetBool("IsWalk", true);
 
         Vector3 tmpVc3 = targetDevilHead.position - transform.position;
-        transform.rotation = Quaternion.Slerp(
+        transform.rotation = Quaternion.Lerp(
             transform.rotation,
             Quaternion.LookRotation(tmpVc3),
             rotateSpeed * Time.deltaTime
@@ -191,15 +195,11 @@ public class TroopsController : MonoBehaviour
 
         if(targetDevilHead.GetComponent<EnemyHealth>().currentHealth<=0)
         {
-            troopState = TroopState.Idle;
+            Destroy(targetDevilHead.gameObject);//临时顶替，要是Enemy死亡销毁无问题，则删除
+            animator.SetTrigger("Victory");
             targetDevilHead = null;
+            troopState = TroopState.Idle;          
         }
-    }
-
-    //造成伤害的公有接口，动画中间调用
-    public void TakeDamage()
-    {
-        targetDevilHead.GetComponent<EnemyHealth>().TekeDamage(20);
     }
 
     //胜利状态接口
@@ -230,5 +230,21 @@ public class TroopsController : MonoBehaviour
     private void SetState(TroopState state)
     {
         troopState = state;
+    }
+
+    /*
+     *  动画调用接口 
+     */
+
+    //造成伤害的公有接口
+    public void AnimTakeDamage()
+    {
+        targetDevilHead.GetComponent<EnemyHealth>().TekeDamage(20);
+    }
+
+    //激活剑的碰撞脚本
+    public void AnimOpenSwordScript()
+    {
+        swordCollider.enabled = true;
     }
 }

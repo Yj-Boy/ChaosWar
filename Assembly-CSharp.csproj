@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\GameScene\Normal\FlagMoveController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Normal\GOMoveAndDestroy.cs" />
     <Compile Include="Assets\Scripts\GameScene\Normal\TimeToDestroyGO.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Troop\SwordColllision.cs" />
     <Compile Include="Assets\Scripts\GameScene\Troop\TroopsController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Troop\TroopsHealth.cs" />
     <Compile Include="Assets\Scripts\StartScene\StartSceneUIController.cs" />
