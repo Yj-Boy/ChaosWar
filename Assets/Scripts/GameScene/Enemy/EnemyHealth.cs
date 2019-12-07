@@ -26,7 +26,7 @@ public class EnemyHealth : MonoBehaviour
         //测试用，以后删除
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            TekeDamage(40);
+            TakeDamage(40);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -35,7 +35,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
     //受伤害公共接口
-    public void TekeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         if(isDead)
         {

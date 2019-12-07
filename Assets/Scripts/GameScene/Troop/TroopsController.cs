@@ -239,7 +239,7 @@ public class TroopsController : MonoBehaviour
     //造成伤害的公有接口
     public void AnimTakeDamage()
     {
-        targetDevilHead.GetComponent<EnemyHealth>().TekeDamage(20);
+        targetDevilHead.GetComponent<EnemyHealth>().TakeDamage(20);
     }
 
     //激活剑的碰撞脚本
