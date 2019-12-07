@@ -1,35 +1,39 @@
-﻿using System.Collections;
+﻿/*
+ *  射手士兵控制脚本 
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 enum State
 {
-    Normal,
-    Spawn,
-    Idle,
-    Shoot,
-    GetHit,
-    Death
+    Normal,     //初始状态，该状态下什么都不做，预留缓冲
+    Spawn,      //生成状态，该状态下做一些生成时的变化
+    Idle,       //闲置状态，该状态作为其他状态的中转
+    Shoot,      //射击状态，该状态下对象旋转朝向攻击对象并射击
+    GetHit,     //被击状态，该状态下触发被击效果并判断是否会死亡
+    Death       //死亡状态，该状态完成销毁对象的相关操作
 }
 
 public class TroopShooterController : MonoBehaviour
 {
-    public float rotateSpeed;
-    public float timeBetweenAttack;
+    public float rotateSpeed;               //旋转速度
+    public float timeBetweenAttack;         //射击时间间隔
 
-    public ParticleSystem shootParticle;
-    public ParticleSystem spawnParticle;
+    public ParticleSystem shootParticle;    //射击瞬间特效
+    public ParticleSystem spawnParticle;    //生成特效
 
-    private Transform shootTargetList;
-    private Transform shootTarget;
+    private Transform shootTargetList;      //射击目标队列
+    private Transform shootTarget;          //射击目标
 
-    private int targetIndex;
+    private int targetIndex;        //射击目标索引
 
-    private float timer;
+    private float timer;            //距离射击间隔的
 
-    private Vector3 scale;
+    private Vector3 scale;          //对象的scale属性
 
-    private Animator animator;
+    private Animator animator;      //对象的状态机
 
     State state;
     
@@ -40,7 +44,6 @@ public class TroopShooterController : MonoBehaviour
 
         animator = GetComponent<Animator>();
         
-
         shootTargetList = GameObject.Find("DevilHeadList").transform;
 
         timer = timeBetweenAttack-1f;
@@ -55,6 +58,7 @@ public class TroopShooterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //对象状态切换
         switch(state)
         {
             case State.Normal:
@@ -88,35 +92,42 @@ public class TroopShooterController : MonoBehaviour
         }
     }
 
+    //初始状态接口
     private void Normal()
     {
         state = State.Spawn;
     }
 
+    //生成状态接口
     private void Spawn()
     {
         animator.enabled = false;
-       
+        //播放生成特效
         spawnParticle.Play();
-
+        //生成时的Scale变化，由0到1
         transform.localScale = Vector3.Lerp(
             transform.localScale,
             scale,
             2f * Time.deltaTime
             );
 
-        Invoke("SpawnToIdle", 2f);
+        Invoke("SpawnToIdle", 3f);
     }
-
+    
+    //生成完后将状态改为Idle接口，该接口延时调用
     private void SpawnToIdle()
     {
+        spawnParticle.Stop();
         state = State.Idle;
-        animator.enabled = true;
+        animator.enabled = true;     
         CancelInvoke();
     }
 
+    //闲置状态接口
     private void Idle()
     {
+        //射击目标队列不为空且射击目标为空
+        //从射击队列里随机选一个当射击目标
         if(shootTargetList.childCount>0&&shootTarget==null)
         {
             targetIndex = Random.Range(0, shootTargetList.childCount);
@@ -125,8 +136,10 @@ public class TroopShooterController : MonoBehaviour
         }
     }
 
+    //射击状态接口
     private void Shoot()
     {
+        //旋转对象朝向射击目标
         Vector3 tmpVc3 = shootTarget.position - transform.position;
         transform.rotation = Quaternion.Lerp(
             transform.rotation,
@@ -134,6 +147,7 @@ public class TroopShooterController : MonoBehaviour
             rotateSpeed * Time.deltaTime
             );
 
+        //到达攻击时间间隔且攻击对象不为空，则射击
         timer += Time.deltaTime;
         if(timer>=timeBetweenAttack&&shootTarget!=null)
         {
@@ -150,8 +164,10 @@ public class TroopShooterController : MonoBehaviour
         }    
     }
 
+    //被击接口
     private void GetHit()
     {
+        //被击若hp小于0，则死，否则转为闲置状态
         if(GetComponent<TroopsHealth>().currentHealth<=0)
         {
             Debug.Log("Dead");
@@ -164,6 +180,7 @@ public class TroopShooterController : MonoBehaviour
         }
     }
 
+    //死亡接口
     private void Death()
     {
         
