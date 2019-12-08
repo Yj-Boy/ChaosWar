@@ -19,10 +19,14 @@ enum State
 public class TroopShooterController : MonoBehaviour
 {
     public float rotateSpeed;               //旋转速度
-    public float timeBetweenAttack;         //射击时间间隔
+    public float miniAttackTime;
+    public float maxAttackTime;
+    private float timeBetweenAttack;         //射击时间间隔
 
     public ParticleSystem shootParticle;    //射击瞬间特效
     public ParticleSystem spawnParticle;    //生成特效
+
+    public GameObject arrow;                //箭
 
     private Transform shootTargetList;      //射击目标队列
     private Transform shootTarget;          //射击目标
@@ -46,7 +50,8 @@ public class TroopShooterController : MonoBehaviour
         
         shootTargetList = GameObject.Find("DevilHeadList").transform;
 
-        timer = timeBetweenAttack-1f;
+        //timer = timeBetweenAttack-1f;
+        timeBetweenAttack = Random.Range(miniAttackTime, maxAttackTime);
 
         scale = transform.localScale;
         transform.localScale = new Vector3(0, 0, 0);
@@ -152,16 +157,22 @@ public class TroopShooterController : MonoBehaviour
         if(timer>=timeBetweenAttack&&shootTarget!=null)
         {
             animator.SetTrigger("Attack");
-            shootTarget.GetComponent<EnemyHealth>().TakeDamage(20);
-            if(shootTarget.GetComponent<EnemyHealth>().currentHealth<=0)
-            {              
-                Destroy(shootTarget.gameObject);//测试用
-                shootTarget = null;
-                animator.SetTrigger("Victory");                      
-                state = State.Idle;
-            }
+            //shootTarget.GetComponent<EnemyHealth>().TakeDamage(20);
+
+            timeBetweenAttack = Random.Range(miniAttackTime, maxAttackTime);
             timer = 0;
         }    
+    }
+
+    public void ChangeShootToIdle()
+    {
+        if (shootTarget.GetComponent<EnemyHealth>().currentHealth <= 0)
+        {
+            Destroy(shootTarget.gameObject);//测试用
+            shootTarget = null;
+            animator.SetTrigger("Victory");
+            state = State.Idle;
+        }
     }
 
     //被击接口
@@ -206,5 +217,20 @@ public class TroopShooterController : MonoBehaviour
     public void AnimToParticle()
     {
         shootParticle.Play();
+    }
+
+    //生成箭
+    public void AnimToSpawnArrow()
+    {
+        Transform trans;
+
+        trans=transform;
+   
+        trans.LookAt(shootTarget);
+
+        GameObject arrowGO = Instantiate(arrow, trans)as GameObject;
+
+        arrowGO.transform.position = shootParticle.transform.position;
+        arrowGO.transform.localScale = shootParticle.transform.localScale;
     }
 }

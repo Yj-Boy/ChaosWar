@@ -132,10 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99af2515781e694ba3aae885d15493d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 0.5
-  timeBetweenAttack: 3
+  rotateSpeed: 1
+  miniAttackTime: 2
+  maxAttackTime: 5
   shootParticle: {fileID: 3547911471941074712}
   spawnParticle: {fileID: 5248630055948150956}
+  arrow: {fileID: 5113615441956555900, guid: 013d97e6a98a727439cda05163711edd, type: 3}
 --- !u!114 &2176064848377808763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1635,8 +1637,7 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.4
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11400000, guid: 3156817f64ec68948ad6bb26569b9ef5, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3156817f64ec68948ad6bb26569b9ef5, type: 3}
 --- !u!4 &3547911471926917720 stripped
 Transform:
