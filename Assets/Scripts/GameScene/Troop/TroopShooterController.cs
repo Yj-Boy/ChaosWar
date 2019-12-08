@@ -122,7 +122,7 @@ public class TroopShooterController : MonoBehaviour
     //生成完后将状态改为Idle接口，该接口延时调用
     private void SpawnToIdle()
     {
-        spawnParticle.Stop();
+        Destroy(spawnParticle.gameObject);
         state = State.Idle;
         animator.enabled = true;     
         CancelInvoke();
@@ -144,36 +144,41 @@ public class TroopShooterController : MonoBehaviour
     //射击状态接口
     private void Shoot()
     {
-        //旋转对象朝向射击目标
-        Vector3 tmpVc3 = shootTarget.position - transform.position;
-        transform.rotation = Quaternion.Lerp(
-            transform.rotation,
-            Quaternion.LookRotation(tmpVc3),
-            rotateSpeed * Time.deltaTime
-            );
-
-        //到达攻击时间间隔且攻击对象不为空，则射击
-        timer += Time.deltaTime;
-        if(timer>=timeBetweenAttack&&shootTarget!=null)
+        if(shootTarget != null)
         {
-            animator.SetTrigger("Attack");
-            //shootTarget.GetComponent<EnemyHealth>().TakeDamage(20);
+            //旋转对象朝向射击目标
+            Vector3 tmpVc3 = shootTarget.position - transform.position;
+            transform.rotation = Quaternion.Lerp(
+                transform.rotation,
+                Quaternion.LookRotation(tmpVc3),
+                rotateSpeed * Time.deltaTime
+                );
 
-            timeBetweenAttack = Random.Range(miniAttackTime, maxAttackTime);
-            timer = 0;
-        }    
-    }
-
-    public void ChangeShootToIdle()
-    {
-        if (shootTarget.GetComponent<EnemyHealth>().currentHealth <= 0)
+            //到达攻击时间间隔且攻击对象不为空，则射击
+            timer += Time.deltaTime;
+            if (timer >= timeBetweenAttack)
+            {
+                animator.SetTrigger("Attack");
+                //shootTarget.GetComponent<EnemyHealth>().TakeDamage(20);
+                timeBetweenAttack = Random.Range(miniAttackTime, maxAttackTime);
+                timer = 0;
+            }
+        }
+        else
         {
-            Destroy(shootTarget.gameObject);//测试用
             shootTarget = null;
-            animator.SetTrigger("Victory");
             state = State.Idle;
         }
     }
+
+    //public void ChangeShootToIdle()
+    //{
+    //    if (shootTarget.GetComponent<EnemyHealth>().currentHealth <= 0)
+    //    {
+    //        Destroy(shootTarget.gameObject);//测试用
+    //        animator.SetTrigger("Victory");
+    //    }
+    //}
 
     //被击接口
     private void GetHit()

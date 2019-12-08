@@ -27,7 +27,7 @@ public class ArrowController : MonoBehaviour
             arrowParticle.transform.SetParent(null);
             arrowParticle.GetComponent<ParticleSystem>().Play();
             other.GetComponent<EnemyHealth>().TakeDamage(20);
-            transform.parent.GetComponent<TroopShooterController>().ChangeShootToIdle();
+            //transform.parent.GetComponent<TroopShooterController>().ChangeShootToIdle();
             Destroy(gameObject);
         }
     }

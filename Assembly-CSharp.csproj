@@ -106,7 +106,6 @@
     <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyHealth.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyList.cs" />
     <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyMoveTarget.cs" />
     <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyShoot.cs" />
