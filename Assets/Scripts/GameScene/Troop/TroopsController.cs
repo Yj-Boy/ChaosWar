@@ -141,14 +141,24 @@ public class TroopsController : MonoBehaviour
             //获得攻击对象后，将状态改为旋转状态
             troopState = TroopState.Rotate;
         }
+        else
+        {
+            troopState = TroopState.Attack;
+        }
     }
 
     //旋转状态接口
     private void Rotate()
     {
+        if(targetDevilHead==null)
+        {
+            animator.SetBool("IsWalk", false);
+            troopState = TroopState.Run;
+        }
         animator.SetBool("IsWalk", true);
 
         Vector3 tmpVc3 = targetDevilHead.position - transform.position;
+        tmpVc3.y = transform.position.y;
         transform.rotation = Quaternion.Lerp(
             transform.rotation,
             Quaternion.LookRotation(tmpVc3),
@@ -166,39 +176,75 @@ public class TroopsController : MonoBehaviour
     //奔跑状态接口
     private void Run()
     {
-        animator.SetBool("IsRun", true);
-
-        transform.position = Vector3.Lerp(
-            transform.position,
-            targetDevilHead.position,
-            runSpeed * Time.deltaTime
-            );
-
-        //Debug.Log("attackRange:" + (targetDevilHead.position - transform.position).sqrMagnitude);
-        if((targetDevilHead.position-transform.position).sqrMagnitude<=attackRange)
+        if(targetDevilHead!=null)
         {
-            animator.SetBool("IsRun", false);
-            troopState = TroopState.Attack;
+            animator.SetBool("IsRun", true);
+
+            Vector3 tmpVc3 = targetDevilHead.position - transform.position;
+            tmpVc3.y = transform.position.y;
+            transform.rotation = Quaternion.Lerp(
+                transform.rotation,
+                Quaternion.LookRotation(tmpVc3),
+                rotateSpeed * Time.deltaTime
+                );
+
+            tmpVc3 = targetDevilHead.position;
+            tmpVc3.y = transform.position.y;
+            transform.position = Vector3.Lerp(
+                transform.position,
+                tmpVc3,
+                runSpeed * Time.deltaTime
+                );
+
+            //Debug.Log("attackRange:" + (targetDevilHead.position - transform.position).sqrMagnitude);
+            if ((tmpVc3 - transform.position).sqrMagnitude <= attackRange)
+            {
+                animator.SetBool("IsRun", false);
+                troopState = TroopState.Attack;
+            }
+        }
+        else
+        {
+            targetDevilHead = null;
+            troopState = TroopState.Idle;
         }
     }
 
     //攻击状态接口
     private void Attack()
     {
-        timer += Time.deltaTime;
-
-        if(timer>=timeBetweenAttack)
+        if(targetDevilHead!=null)
         {
-            animator.SetTrigger("Attack");
-            timer = 0;
-        }   
+            if(targetDevilHead.GetComponent<EnemyHealth>().currentHealth<=0)
+            {
+                troopState = TroopState.Idle;
+            }
 
-        if(targetDevilHead.GetComponent<EnemyHealth>().currentHealth<=0)
+            if ((targetDevilHead.position - transform.position).sqrMagnitude > attackRange)
+            {
+                animator.SetBool("IsRun", true);
+                troopState = TroopState.Run;
+            }
+
+            timer += Time.deltaTime;
+
+            if (timer >= timeBetweenAttack)
+            {
+                animator.SetTrigger("Attack");
+                timer = 0;
+            }
+
+            //if (targetDevilHead.GetComponent<EnemyHealth>().currentHealth <= 0)
+            //{
+            //    //Destroy(targetDevilHead.gameObject);//临时顶替，要是Enemy死亡销毁无问题，则删除
+            //    animator.SetTrigger("Victory");            
+            //}
+            
+        }
+        else
         {
-            Destroy(targetDevilHead.gameObject);//临时顶替，要是Enemy死亡销毁无问题，则删除
-            animator.SetTrigger("Victory");
             targetDevilHead = null;
-            troopState = TroopState.Idle;          
+            troopState = TroopState.Idle;
         }
     }
 
@@ -211,11 +257,13 @@ public class TroopsController : MonoBehaviour
     //被击状态接口
     private void GetHit()
     {
-        animator.SetTrigger("GetHit");
+        animator.SetBool("IsRun", false);
+        animator.SetBool("IsWalk", false);
+        animator.SetBool("IsGetHit",true);
 
         if(GetComponent<TroopsHealth>().currentHealth<=0)
         {
-            animator.SetBool("IsDeath", true);
+            //animator.SetBool("IsDeath", true);
             troopState = TroopState.Death;
         }
     }
@@ -227,9 +275,9 @@ public class TroopsController : MonoBehaviour
     }
 
     //设置对象状态接口
-    private void SetState(TroopState state)
+    public void SetStateToGetHit()
     {
-        troopState = state;
+        troopState = TroopState.GetHit;
     }
 
     /*
@@ -246,5 +294,19 @@ public class TroopsController : MonoBehaviour
     public void AnimOpenSwordScript()
     {
         swordCollider.enabled = true;
+    }
+
+    public void AnimJudgeDeathOrIdle()
+    { 
+        if (GetComponent<TroopsHealth>().currentHealth>0)
+        {
+            timer = timeBetweenAttack;
+            animator.SetBool("IsGetHit", false);
+            troopState = TroopState.Idle;         
+        }
+        else
+        {
+            animator.SetBool("IsDeath", true);
+        }
     }
 }

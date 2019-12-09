@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SwordColllision : MonoBehaviour
 {
-    public ParticleSystem attackParticle;//攻击特效
+    public GameObject attackParticle;//攻击特效
+    public Transform particleTrans;
 
     private void Start()
     {
@@ -23,7 +24,9 @@ public class SwordColllision : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             Debug.Log("SwordTriggerEnter");
-            attackParticle.Play();
+            //attackParticle.Play();
+            GameObject particle = Instantiate(attackParticle)as GameObject;
+            particle.transform.position = particleTrans.position;
             GetComponent<CapsuleCollider>().enabled = false;
         }
     }

@@ -47,8 +47,8 @@ public class EnemyHealth : MonoBehaviour
         if(currentHealth<=0)
         {
             //测试用，直接销毁
-            Destroy(gameObject);
-            //Death();
+            //Destroy(gameObject);
+            Death();
         }
     }
 

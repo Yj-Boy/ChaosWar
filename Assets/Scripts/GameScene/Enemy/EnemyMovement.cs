@@ -18,23 +18,33 @@ public class EnemyMovement : MonoBehaviour
     TroopsHealth troopsHealth;          //troop血量对象
     NavMeshAgent nav;                   //NavMeshAgent对象
 
-    private void Awake()
+    private void Start()
     {
         nav = GetComponent<NavMeshAgent>();
         enemyMoveTarget = GameObject.Find("EnemyMoveTarget").GetComponent<EnemyMoveTarget>();
         targetIndex = Random.Range(0, enemyMoveTarget.GetLength());
+        Debug.Log("tmpIndex:" + tmpIndex);
         waitTime = 0;
     }
 
     public void Move()
     {
+        if(nav.enabled==false)
+        {
+            nav.enabled = true;
+        }
         //若enemy与目标点的距离小于某个值时，移动到目标点
         if((transform.position- enemyMoveTarget.GetPosition(targetIndex)).sqrMagnitude>=18)
         {
-            nav.SetDestination(enemyMoveTarget.GetPosition(targetIndex));
-            GetComponent<Animator>().SetBool("DevilHeadMove", true);
-            //Debug.Log((transform.position - enemyMoveTarget.GetPosition(targetIndex)).sqrMagnitude);
-            //Debug.Log("move");
+            if(nav.isOnNavMesh)
+            {
+                nav.SetDestination(enemyMoveTarget.GetPosition(targetIndex));
+                GetComponent<Animator>().SetBool("DevilHeadMove", true);
+            }
+            else
+            {
+                Debug.Log("不在nav网格内");
+            }         
         }
         else
         {
@@ -47,7 +57,7 @@ public class EnemyMovement : MonoBehaviour
                 {
                     tmpIndex = targetIndex;
                     targetIndex = Random.Range(0, enemyMoveTarget.GetLength());
-                    Debug.Log("tmpIndex" + tmpIndex);
+                    //Debug.Log("tmpIndex" + tmpIndex);
                 } while (tmpIndex == targetIndex);
                 waitTime = 0;
             }

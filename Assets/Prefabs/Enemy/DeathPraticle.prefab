@@ -60331,7 +60331,6 @@ GameObject:
   - component: {fileID: 3000527216135977884}
   - component: {fileID: 3131377915284478030}
   - component: {fileID: 3131955470794861324}
-  - component: {fileID: 2892366666235986826}
   m_Layer: 0
   m_Name: DeathPraticle
   m_TagString: Untagged
@@ -64988,19 +64987,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &2892366666235986826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3004960232778678614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fd2e8874f60266498a388d7229a1bac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnlyDeactivate: 0
 --- !u!1 &3005013541215831808
 GameObject:
   m_ObjectHideFlags: 0

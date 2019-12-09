@@ -148,6 +148,7 @@ public class TroopShooterController : MonoBehaviour
         {
             //旋转对象朝向射击目标
             Vector3 tmpVc3 = shootTarget.position - transform.position;
+            tmpVc3.y -= 2f;
             transform.rotation = Quaternion.Lerp(
                 transform.rotation,
                 Quaternion.LookRotation(tmpVc3),
@@ -162,6 +163,12 @@ public class TroopShooterController : MonoBehaviour
                 //shootTarget.GetComponent<EnemyHealth>().TakeDamage(20);
                 timeBetweenAttack = Random.Range(miniAttackTime, maxAttackTime);
                 timer = 0;
+            }
+
+            if(shootTarget.GetComponent<EnemyHealth>().currentHealth<=0)
+            {
+                shootTarget = null;
+                state = State.Idle;
             }
         }
         else
@@ -183,17 +190,12 @@ public class TroopShooterController : MonoBehaviour
     //被击接口
     private void GetHit()
     {
-        //被击若hp小于0，则死，否则转为闲置状态
-        if(GetComponent<TroopsHealth>().currentHealth<=0)
-        {
-            Debug.Log("Dead");
-            animator.SetBool("IsDeath", true);
-            state = State.Death;
-        }
-        else
-        {
-            state = State.Idle;
-        }
+        animator.SetBool("GetHit",true);
+    }
+
+    public void SetStateToGetHit()
+    {
+        state = State.GetHit;
     }
 
     //死亡接口
@@ -237,5 +239,22 @@ public class TroopShooterController : MonoBehaviour
 
         arrowGO.transform.position = shootParticle.transform.position;
         arrowGO.transform.localScale = shootParticle.transform.localScale;
+    }
+
+    //动画判断被击是否造成死亡
+    public void AnimToJudgeDeath()
+    {
+        //被击若hp小于0，则死，否则转为闲置状态
+        if (GetComponent<TroopsHealth>().currentHealth <= 0)
+        {
+            Debug.Log("Dead");
+            animator.SetBool("IsDeath", true);
+            state = State.Death;
+        }
+        else
+        {
+            animator.SetBool("GetHit", false);
+            state = State.Idle;
+        }
     }
 }
