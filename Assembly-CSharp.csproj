@@ -102,9 +102,11 @@
     <Compile Include="Assets\Scripts\ECS\TroopsTagComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\WallTagComponent.cs" />
     <Compile Include="Assets\Scripts\GameScene\Boss\BossController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Controller\GoldManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\Controller\SpawnDevilHead.cs" />
     <Compile Include="Assets\Scripts\GameScene\Controller\SpawnTroop.cs" />
     <Compile Include="Assets\Scripts\GameScene\Controller\SpawnTroopShooter.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Controller\UIManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyHealth.cs" />

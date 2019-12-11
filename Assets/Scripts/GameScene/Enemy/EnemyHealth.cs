@@ -11,6 +11,9 @@ public class EnemyHealth : MonoBehaviour
     public int startingHealth;          //enemy血量
     public int currentHealth;           //enemy血量中间值，用于运算
     public ParticleSystem deathParticle;//死亡特效
+    public int price;
+
+    private GoldManager goldManager;
 
     bool isDead;                        //是否死亡
     bool isDark;                        //是否下沉
@@ -19,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = startingHealth;
         deathParticle.Stop();
+        goldManager = GameObject.Find("GoldManager").GetComponent<GoldManager>();
     }
 
     private void Update()
@@ -58,6 +62,7 @@ public class EnemyHealth : MonoBehaviour
         isDead = true;
         GetComponent<SphereCollider>().isTrigger = true;
         GetComponent<Animator>().SetTrigger("DevilHeadDown");
+        goldManager.AddGold(price);
     }
 
     //暗化接口

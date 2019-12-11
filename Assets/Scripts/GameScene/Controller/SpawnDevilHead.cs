@@ -74,7 +74,7 @@ public class SpawnDevilHead : MonoBehaviour
             magicCirleTrans = spawnTrans[i];
             Vector3 beforVec3= spawnTrans[i].position;
             Vector3 tmpVec3 = magicCirleTrans.position;
-            tmpVec3.y = 0.2f;
+            tmpVec3.y = 7.7f;
             magicCirleTrans.position = tmpVec3;
             Instantiate(magicCircle, magicCirleTrans);
             spawnTrans[i].position = beforVec3;

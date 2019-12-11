@@ -4891,6 +4891,7 @@ MonoBehaviour:
   startingHealth: 100
   currentHealth: 0
   deathParticle: {fileID: 6225961966128395950}
+  price: 40
 --- !u!114 &1792640982
 MonoBehaviour:
   m_ObjectHideFlags: 0
