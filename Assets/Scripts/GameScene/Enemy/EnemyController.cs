@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
 
         moveUpTarget = transform.position;
         moveUpTarget.y += 2.7f;
-        Debug.Log("moveUpTarget.y:" + moveUpTarget.y);
+        //Debug.Log("moveUpTarget.y:" + moveUpTarget.y);
     }
 
     // Update is called once per frame
@@ -104,10 +104,10 @@ public class EnemyController : MonoBehaviour
         }
 
         //测试用
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            GetState();
-        }
+        //if(Input.GetKeyDown(KeyCode.D))
+        //{
+        //    GetState();
+        //}
     }
 
     

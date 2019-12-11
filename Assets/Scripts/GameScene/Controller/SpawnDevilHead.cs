@@ -44,13 +44,6 @@ public class SpawnDevilHead : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //测试用
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            Debug.Log("GetKeyDown:"+ spawnTrans.Length);
-            SpawnDevilHeadGO();         
-        }
-
         //心跳检测
         HeartBeat();
     }
@@ -73,7 +66,7 @@ public class SpawnDevilHead : MonoBehaviour
         for (int i = 0; i < spawnTrans.Length; i++)
         {
             //实例化对象
-            Debug.Log("spawnTrans:" + spawnTrans[i].position.y);
+            //Debug.Log("spawnTrans:" + spawnTrans[i].position.y);
             devilHeadGO = Instantiate(goPrefab, spawnTrans[i]);
             devilHeadGO.transform.parent = parentTrans;
 

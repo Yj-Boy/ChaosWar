@@ -55,7 +55,7 @@ public class EnemyAttack : MonoBehaviour
                 GetComponent<Animator>().SetBool("DevilHeadMove", true);
 
                 //若与攻击目标的距离小于某个值，则攻击，否则移动
-                if ((transform.position - targetTroop.position).sqrMagnitude < 14)
+                if ((transform.position - targetTroop.position).sqrMagnitude < 25)
                 {
                     //累计时间，若大于攻击时间间隔，则攻击
                     timer += 1f*Time.deltaTime;

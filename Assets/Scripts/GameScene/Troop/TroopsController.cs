@@ -96,13 +96,13 @@ public class TroopsController : MonoBehaviour
         }
 
         //测试用
-        if(Input.GetKey(KeyCode.E))
-        {
-            GetComponent<TroopsHealth>().TakeDamage(110);
+        //if(Input.GetKey(KeyCode.E))
+        //{
+        //    GetComponent<TroopsHealth>().TakeDamage(110);
 
-            troopState = TroopState.GetHit;
+        //    troopState = TroopState.GetHit;
             
-        }
+        //}
     }
 
     //生成对象接口

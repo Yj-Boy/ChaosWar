@@ -75,7 +75,7 @@ public class CreateBossMainSkill : MonoBehaviour
     {
         isLaunch = true;
         times = 0;
-        Debug.Log("CreateBossMainSkill/Launch==="+"isLaunch:"+isLaunch+"===times:"+times);
+        //Debug.Log("CreateBossMainSkill/Launch==="+"isLaunch:"+isLaunch+"===times:"+times);
     }
 
     public void Stop()
@@ -97,6 +97,7 @@ public class CreateBossMainSkill : MonoBehaviour
             typeof(MoveForwardComponent),
             typeof(RotateByOnePointComponent),
             typeof(TimeToLiveComponent),
+            typeof(IsDestroyComponent),
             typeof(RenderMesh),
             typeof(LocalToWorld)
             );
@@ -135,7 +136,7 @@ public class CreateBossMainSkill : MonoBehaviour
                 duration = UnityEngine.Random.Range(-1, 0)
             });
             entityManager.SetComponentData(entityArr[i], new TimeToLiveComponent {
-                value = 2f
+                value = 10f
             });
             entityManager.SetSharedComponentData(entityArr[i], new RenderMesh
             {

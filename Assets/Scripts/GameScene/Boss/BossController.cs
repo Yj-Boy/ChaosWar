@@ -40,7 +40,7 @@ public class BossController : MonoBehaviour
                 bossAnimator.SetBool("BackBossAttack", true);
                 bossAnimator.SetBool("BossAttack", false);
                 tmpSkillTime = 0f;
-                Debug.Log("BossAttackFalse");
+                //Debug.Log("BossAttackFalse");
             }
         }
     }

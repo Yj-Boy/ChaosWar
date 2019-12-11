@@ -31,7 +31,7 @@ public class TroopsHealth : MonoBehaviour
     {     
         isDamage = true;
         currentHealth -= amount;
-        Debug.Log("TakeDamage:" + currentHealth);
+        //Debug.Log("TakeDamage:" + currentHealth);
         if (currentHealth<=0&&!isDead)
         {
             Death();

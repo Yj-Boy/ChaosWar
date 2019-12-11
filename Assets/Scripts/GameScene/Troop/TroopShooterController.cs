@@ -87,14 +87,14 @@ public class TroopShooterController : MonoBehaviour
         }
 
         //被击测试
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            animator.SetTrigger("GetHit");
-            //伤害应该由攻击方决定，这里只做测试
-            GetComponent<TroopsHealth>().TakeDamage(30);
+        //if(Input.GetKeyDown(KeyCode.F))
+        //{
+        //    animator.SetTrigger("GetHit");
+        //    //伤害应该由攻击方决定，这里只做测试
+        //    GetComponent<TroopsHealth>().TakeDamage(30);
 
-            state = State.GetHit;
-        }
+        //    state = State.GetHit;
+        //}
     }
 
     //初始状态接口
@@ -248,7 +248,7 @@ public class TroopShooterController : MonoBehaviour
         //被击若hp小于0，则死，否则转为闲置状态
         if (GetComponent<TroopsHealth>().currentHealth <= 0)
         {
-            Debug.Log("Dead");
+            //Debug.Log("Dead");
             animator.SetBool("IsDeath", true);
             state = State.Death;
         }

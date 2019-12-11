@@ -23,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         enemyMoveTarget = GameObject.Find("EnemyMoveTarget").GetComponent<EnemyMoveTarget>();
         targetIndex = Random.Range(0, enemyMoveTarget.GetLength());
-        Debug.Log("tmpIndex:" + tmpIndex);
+        //sDebug.Log("tmpIndex:" + tmpIndex);
         waitTime = 0;
     }
 

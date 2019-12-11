@@ -24,14 +24,14 @@ public class EnemyHealth : MonoBehaviour
     private void Update()
     {
         //测试用，以后删除
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            TakeDamage(40);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Destroy(gameObject);
-        }
+        //if(Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    TakeDamage(40);
+        //}
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     //受伤害公共接口
