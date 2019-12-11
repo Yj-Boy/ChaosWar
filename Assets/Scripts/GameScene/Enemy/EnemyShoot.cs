@@ -111,7 +111,7 @@ public class EnemyShoot : MonoBehaviour
             shootParticle.Stop();
 
             lineTimer += Time.deltaTime;
-            if (lineTimer <= 0.5f)
+            if (lineTimer <= 1f)
             {
                 //tmpShootTargetV = Vector3.Lerp(lineTrans.position, targetTroopShooter.position, 3f * Time.deltaTime);
                 tmpShootTargetV += (targetTroopShooter.position - lineTrans.position).normalized * Time.deltaTime * 90f;
@@ -141,5 +141,10 @@ public class EnemyShoot : MonoBehaviour
     public void AnimToShoot()
     {
         isShooting = true;
+    }
+
+    public void AnimSetlineRender()
+    {
+        lineRender.enabled = false;
     }
 }

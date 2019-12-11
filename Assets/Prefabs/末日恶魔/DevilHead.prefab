@@ -4888,7 +4888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f722d23568cc89a43833e98e713a43ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 1000
+  startingHealth: 100
   currentHealth: 0
   deathParticle: {fileID: 6225961966128395950}
 --- !u!114 &1792640982
@@ -5216,6 +5216,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SizeBySpeedModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3332347854755027093, guid: a365f638fd4caef4a8afd0556c55abab,
+        type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3332347854755027093, guid: a365f638fd4caef4a8afd0556c55abab,
         type: 3}

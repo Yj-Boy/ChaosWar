@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class SpawnDevilHead : MonoBehaviour
 {
-    public Transform spawnTrans;
-    public GameObject goPrefab;
-    public GameObject magicCircle;
+    public Transform[] spawnTrans;              //生成位置列表
+    public Transform parentTrans;               //生成对象要设置的父对象
+    public GameObject goPrefab;                 //实例化的预制体
+    public GameObject magicCircle;              //生成的魔法阵特效
+    public float heartBeatTime;
 
-    private GameObject devilHeadGO;
-    private Transform targetTrans;
-    private Transform magicCirleTrans;
+    private GameObject devilHeadGO;             //生成对象
+    private Transform magicCirleTrans;          //魔法阵的位置
+    private float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,14 +21,6 @@ public class SpawnDevilHead : MonoBehaviour
         {
             Debug.Log(GetType() + "SpawnDevilHead/Start()/spwnTrans没有设置！");
         }
-        //else
-        //{
-        //    targetTrans.position.Set(
-        //        spawnTrans.position.x,
-        //        spawnTrans.position.x + 2f,
-        //        spawnTrans.position.z
-        //        );
-        //}
 
         if (goPrefab == null)
         {
@@ -38,7 +32,13 @@ public class SpawnDevilHead : MonoBehaviour
             Debug.Log(GetType() + "SpawnDevilHead/Start()/magicCircle没有设置！");
         }
 
-        
+        if(heartBeatTime==0)
+        {
+            Debug.Log(GetType() + "SpawnDevilHead/Start()/heartBeatTime为0！请设置！");
+        }
+
+        //参数初始化
+        timer = heartBeatTime;
     }
 
     // Update is called once per frame
@@ -47,37 +47,44 @@ public class SpawnDevilHead : MonoBehaviour
         //测试用
         if(Input.GetKeyDown(KeyCode.J))
         {
+            Debug.Log("GetKeyDown:"+ spawnTrans.Length);
             SpawnDevilHeadGO();         
         }
 
-        //if(devilHeadGO!=null)
-        //{
-        //    if(devilHeadGO.transform.position.y<=targetTrans.position.y)
-        //    {
-        //        devilHeadGO.transform.position = Vector3.Lerp(
-        //            devilHeadGO.transform.position,
-        //            targetTrans.position,
-        //            0.5f * Time.deltaTime
-        //            );
-        //    }
-        //    else
-        //    {
-        //        devilHeadGO.GetComponent<EnemyController>().enabled = true;
-        //        devilHeadGO = null;
-        //    }
-        //}
+        //心跳检测
+        HeartBeat();
+    }
+
+    public void HeartBeat()
+    {
+        timer += Time.deltaTime;
+        if(timer>=heartBeatTime)
+        {
+            if(parentTrans.childCount<=0)
+            {
+                SpawnDevilHeadGO();
+            }
+            timer = 0;
+        }
     }
 
     private void SpawnDevilHeadGO()
     {
-        Debug.Log("spawnTrans:" + spawnTrans.position.y);
-        devilHeadGO=Instantiate(goPrefab, spawnTrans);
-        devilHeadGO.transform.parent = null;
+        for (int i = 0; i < spawnTrans.Length; i++)
+        {
+            //实例化对象
+            Debug.Log("spawnTrans:" + spawnTrans[i].position.y);
+            devilHeadGO = Instantiate(goPrefab, spawnTrans[i]);
+            devilHeadGO.transform.parent = parentTrans;
 
-        magicCirleTrans = spawnTrans;
-        Vector3 tmpVec3 = magicCirleTrans.position;
-        tmpVec3.y = 0;
-        magicCirleTrans.position = tmpVec3;
-        Instantiate(magicCircle, magicCirleTrans);   
+            //实例化魔法阵
+            magicCirleTrans = spawnTrans[i];
+            Vector3 beforVec3= spawnTrans[i].position;
+            Vector3 tmpVec3 = magicCirleTrans.position;
+            tmpVec3.y = 0.2f;
+            magicCirleTrans.position = tmpVec3;
+            Instantiate(magicCircle, magicCirleTrans);
+            spawnTrans[i].position = beforVec3;
+        }          
     }
 }

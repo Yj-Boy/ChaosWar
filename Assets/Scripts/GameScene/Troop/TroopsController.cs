@@ -149,28 +149,32 @@ public class TroopsController : MonoBehaviour
 
     //旋转状态接口
     private void Rotate()
-    {
-        if(targetDevilHead==null)
+    {        
+        if (targetDevilHead != null)
         {
+            animator.SetBool("IsWalk", true);
+
+            Vector3 tmpVc3 = targetDevilHead.position - transform.position;
+            tmpVc3.y = transform.position.y;
+            transform.rotation = Quaternion.Lerp(
+                transform.rotation,
+                Quaternion.LookRotation(tmpVc3),
+                rotateSpeed * Time.deltaTime
+                );
+
+            //Debug.Log("runAngleRange:" + Vector3.Angle(transform.forward, tmpVc3));
+            if (Vector3.Angle(transform.forward, tmpVc3) <= runAngleRange)
+            {
+                animator.SetBool("IsWalk", false);
+                troopState = TroopState.Run;
+            }
+        }
+        else
+        {
+            targetDevilHead = null;
             animator.SetBool("IsWalk", false);
             troopState = TroopState.Run;
-        }
-        animator.SetBool("IsWalk", true);
-
-        Vector3 tmpVc3 = targetDevilHead.position - transform.position;
-        tmpVc3.y = transform.position.y;
-        transform.rotation = Quaternion.Lerp(
-            transform.rotation,
-            Quaternion.LookRotation(tmpVc3),
-            rotateSpeed * Time.deltaTime
-            );
-
-        //Debug.Log("runAngleRange:" + Vector3.Angle(transform.forward, tmpVc3));
-        if (Vector3.Angle(transform.forward,tmpVc3)<=runAngleRange)
-        {
-            animator.SetBool("IsWalk", false);
-            troopState = TroopState.Run;
-        }
+        }         
     }
 
     //奔跑状态接口
@@ -205,6 +209,7 @@ public class TroopsController : MonoBehaviour
         }
         else
         {
+            animator.SetBool("IsRun", false);
             targetDevilHead = null;
             troopState = TroopState.Idle;
         }
@@ -287,7 +292,10 @@ public class TroopsController : MonoBehaviour
     //造成伤害的公有接口
     public void AnimTakeDamage()
     {
-        targetDevilHead.GetComponent<EnemyHealth>().TakeDamage(20);
+        if(targetDevilHead!=null)
+        {
+            targetDevilHead.GetComponent<EnemyHealth>().TakeDamage(20);
+        }    
     }
 
     //激活剑的碰撞脚本

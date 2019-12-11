@@ -135,6 +135,7 @@ public class TroopShooterController : MonoBehaviour
         //从射击队列里随机选一个当射击目标
         if(shootTargetList.childCount>0&&shootTarget==null)
         {
+            //Debug.Log("shootTargetList.childCount:" + shootTargetList.childCount);
             targetIndex = Random.Range(0, shootTargetList.childCount);
             shootTarget = shootTargetList.GetChild(targetIndex);
             state = State.Shoot;        
