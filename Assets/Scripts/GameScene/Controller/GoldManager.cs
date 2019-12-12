@@ -5,20 +5,44 @@ using UnityEngine.UI;
 
 public class GoldManager : MonoBehaviour
 {
-    public Text goldText;
+    private static GoldManager instance;
+    private static readonly object threadSafeLock = new object();
+
+    public static GoldManager Instance
+    {
+        get
+        {
+            if(instance==null)
+            {
+                lock(threadSafeLock)
+                {
+                    if(instance==null)
+                    {
+                        instance = new GoldManager();
+                    }
+                }
+            }
+            return instance;
+        }
+    }
 
     private int gold;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
         gold = 100;
-        goldText.text = gold.ToString();
+        UIManager.Instance.InitGoldSlider(gold);
     }
 
     public void AddGold(int amount)
     {
         gold += amount;
-        goldText.text = gold.ToString();
+        UIManager.Instance.UpdateGoldSliderValue(gold);
     }
 
     public bool SubGold(int amount)
@@ -31,7 +55,7 @@ public class GoldManager : MonoBehaviour
         else
         {
             gold -= amount;
-            goldText.text = gold.ToString();
+            UIManager.Instance.UpdateGoldSliderValue(gold);
             return true;
         }       
     }

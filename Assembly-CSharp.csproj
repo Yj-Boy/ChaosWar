@@ -79,6 +79,7 @@
     <Compile Include="Assets\Particle Attractor by Moonflower Carnivore\Scripts\rotation.cs" />
     <Compile Include="Assets\Scripts\Currency\Progressbar.cs" />
     <Compile Include="Assets\Scripts\Currency\ShakeCamera.cs" />
+    <Compile Include="Assets\Scripts\Currency\Singleton.cs" />
     <Compile Include="Assets\Scripts\ECS\CollisionSystem.cs" />
     <Compile Include="Assets\Scripts\ECS\CreateAsteroid.cs" />
     <Compile Include="Assets\Scripts\ECS\CreateBossMainSkill.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Assets\Scripts\ECS\TroopsTagComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\WallTagComponent.cs" />
     <Compile Include="Assets\Scripts\GameScene\Boss\BossController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Boss\BossHpController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Controller\GoldManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\Controller\SpawnDevilHead.cs" />
     <Compile Include="Assets\Scripts\GameScene\Controller\SpawnTroop.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyMoveTarget.cs" />
     <Compile Include="Assets\Scripts\GameScene\Enemy\EnemyShoot.cs" />
     <Compile Include="Assets\Scripts\GameScene\Hero\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Normal\CastleHealth.cs" />
     <Compile Include="Assets\Scripts\GameScene\Normal\FlagMoveController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Normal\GOMoveAndDestroy.cs" />
     <Compile Include="Assets\Scripts\GameScene\Normal\TimeToDestroyGO.cs" />

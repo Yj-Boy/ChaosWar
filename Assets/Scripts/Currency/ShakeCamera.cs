@@ -4,6 +4,28 @@ using UnityEngine;
 
 public class ShakeCamera : MonoBehaviour
 {
+    //改单例
+    private static ShakeCamera instance=null;
+    private static readonly object threadSafeLock = new object();
+
+    public static ShakeCamera Instance
+    {
+        get
+        {
+            if(instance==null)
+            {
+                lock(threadSafeLock)
+                {
+                    if(instance==null)
+                    {
+                        instance = new ShakeCamera();
+                    }
+                }
+            }
+            return instance;
+        }
+    }
+
 
     // 抖动目标的transform(若未添加引用，怎默认为当前物体的transform)
     public Transform camTransform;
@@ -24,14 +46,16 @@ public class ShakeCamera : MonoBehaviour
         {
             camTransform = GetComponent(typeof(Transform)) as Transform;
         }
+
+        instance = this;
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         originalPos = camTransform.localPosition;
     }
 
-    void Update()
+    private void Update()
     {
         if (shake > 0)
         {
@@ -51,5 +75,15 @@ public class ShakeCamera : MonoBehaviour
         shake = time;
         shakeAmount = amount;
         decreaseFactor = decrease;
+    }
+
+    public void StartShakeCamera()
+    {
+        if(shake==0)
+        {
+            shake = 0.01f;
+            shakeAmount = 0.05f;
+            decreaseFactor = 0.05f;
+        }
     }
 }

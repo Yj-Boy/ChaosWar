@@ -10,6 +10,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public float timeBetweenAttack;         //进攻时间间隔
     public ParticleSystem attackParticles;  //攻击粒子特效
+    public int attackCastleNum;
 
     private Transform troops;               //攻击目标的父对象
     private Transform targetTroop;          //当前攻击目标
@@ -30,6 +31,16 @@ public class EnemyAttack : MonoBehaviour
     private void Update()
     {     
         troopsNum = troops.childCount; 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("CastleAttackTarget"))
+        {
+            CastleHealth.Instance.SubHealth(attackCastleNum);
+            ShakeCamera.Instance.StartShakeCamera();
+            Destroy(gameObject);
+        }
     }
 
     public int GetTroopsNum()

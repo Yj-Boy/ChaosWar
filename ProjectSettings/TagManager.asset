@@ -9,6 +9,8 @@ TagManager:
   - Troop
   - TroopShooter
   - Enemy
+  - FxTemporaire
+  - CastleAttackTarget
   layers:
   - Default
   - TransparentFX
