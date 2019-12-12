@@ -4,11 +4,36 @@ using UnityEngine;
 
 public class BossHpController : MonoBehaviour
 {
+    //单例模式
+    private static BossHpController instance = null;
+    private static readonly object threadSafeLock = new object();
+
+    public static BossHpController Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                lock (threadSafeLock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new BossHpController();
+                    }
+                }
+            }
+            return instance;
+        }
+    }
+
     public int startingHealth;
 
     private int currentHealth;
     private bool isDead;
-
+    private void Awake()
+    {
+        instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {

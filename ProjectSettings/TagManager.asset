@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - FxTemporaire
   - CastleAttackTarget
+  - BossAttackTarget
   layers:
   - Default
   - TransparentFX

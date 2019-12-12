@@ -1111,6 +1111,7 @@ MonoBehaviour:
   attackRange: 13
   runAngleRange: 14
   timeBetweenAttack: 2.5
+  sacrificeDamage: 20
   swordCollider: {fileID: 284950600}
 --- !u!54 &1365642204188115699
 Rigidbody:

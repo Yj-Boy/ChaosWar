@@ -27,14 +27,18 @@ public class TroopsController : MonoBehaviour
     public float runAngleRange;         //对象旋转至可以奔跑的角度
     public float timeBetweenAttack;     //对象攻击的时间间隔
 
+    public int sacrificeDamage;        //献祭伤害
+
     public CapsuleCollider swordCollider; //剑的碰撞脚本
 
     private int devilHeadIndex;         //攻击对象的索引
+    
 
     private float timer;                //距离上一次攻击时间间隔的时间
 
     private Transform devilHeadList;    //攻击对象列表
     private Transform targetDevilHead;  //攻击对象
+    private Transform bossAttackTarget;  //攻击boss的献祭点
 
     private Animator animator;          //对象的状态机
     
@@ -61,6 +65,8 @@ public class TroopsController : MonoBehaviour
         Invoke("Spawn", 0.5f);
         //初始关闭剑的碰撞脚本
         swordCollider.enabled = false;
+        //初始化士兵祭献点
+        bossAttackTarget = GameObject.Find("BossAttackTarget").transform;
     }
 
     // Update is called once per frame
@@ -94,15 +100,6 @@ public class TroopsController : MonoBehaviour
                 Death();
                 break;
         }
-
-        //测试用
-        //if(Input.GetKey(KeyCode.E))
-        //{
-        //    GetComponent<TroopsHealth>().TakeDamage(110);
-
-        //    troopState = TroopState.GetHit;
-            
-        //}
     }
 
     //生成对象接口
@@ -133,18 +130,49 @@ public class TroopsController : MonoBehaviour
     //闲置状态接口
     private void Idle()
     {
-        //如果攻击对象列表不为空且攻击目标为空，则从攻击对象列表中随机一个
-        if(devilHeadList.childCount>0&&targetDevilHead==null)
+        if (devilHeadList.childCount == 0 && targetDevilHead == null
+            || transform.position.z > 0)
         {
+            MoveToBossAttackTarget();
+        }
+        //如果攻击对象列表不为空且攻击目标为空，则从攻击对象列表中随机一个
+        else if (devilHeadList.childCount>0
+            &&targetDevilHead==null
+            &&transform.position.z<=0)
+        {
+            animator.SetBool("IsRun", false);
             devilHeadIndex = Random.Range(0, devilHeadList.childCount);
             targetDevilHead = devilHeadList.GetChild(devilHeadIndex);
             //获得攻击对象后，将状态改为旋转状态
             troopState = TroopState.Rotate;
-        }
+        }      
         else
         {
             troopState = TroopState.Attack;
         }
+    }
+
+    //移动到献祭点接口
+    private void MoveToBossAttackTarget()
+    {
+        animator.SetBool("IsWalk", true);
+        Vector3 tmpVc3 = bossAttackTarget.position;
+        transform.rotation = Quaternion.Lerp(
+            transform.rotation,
+            Quaternion.LookRotation(tmpVc3),
+            rotateSpeed * Time.deltaTime
+            );
+        if (Vector3.Angle(transform.forward, tmpVc3) <= runAngleRange)
+        {
+            animator.SetBool("IsWalk", false);
+            animator.SetBool("IsRun", true);
+            tmpVc3.y += 2f;
+            transform.position = Vector3.Lerp(
+            transform.position,
+            tmpVc3,
+            runSpeed * Time.deltaTime
+            );
+        }  
     }
 
     //旋转状态接口
@@ -173,7 +201,7 @@ public class TroopsController : MonoBehaviour
         {
             targetDevilHead = null;
             animator.SetBool("IsWalk", false);
-            troopState = TroopState.Run;
+            troopState = TroopState.Idle;
         }         
     }
 
@@ -286,6 +314,19 @@ public class TroopsController : MonoBehaviour
     }
 
     /*
+     *  碰撞检测
+     */
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("BossAttackTarget"))
+        {
+            Destroy(gameObject);
+            BossHpController.Instance.SubHp(sacrificeDamage);
+        }
+    }
+
+    /*
      *  动画调用接口 
      */
 
@@ -304,6 +345,7 @@ public class TroopsController : MonoBehaviour
         swordCollider.enabled = true;
     }
 
+    //判断是否被击是否死亡接口
     public void AnimJudgeDeathOrIdle()
     { 
         if (GetComponent<TroopsHealth>().currentHealth>0)
