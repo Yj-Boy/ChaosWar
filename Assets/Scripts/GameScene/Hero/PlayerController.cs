@@ -37,8 +37,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         MoveHero();
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space)
+            &&UIManager.Instance.GetSkillButtonEnable(2))
         {
+            UIManager.Instance.ResetSkillCountDownTime(2);
             ButtonLaunchThousandsOfTroops();
         }
     }

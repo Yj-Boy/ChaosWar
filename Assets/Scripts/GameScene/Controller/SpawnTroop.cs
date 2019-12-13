@@ -18,8 +18,10 @@ public class SpawnTroop : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        if(Input.GetKeyDown(KeyCode.W)
+            &&UIManager.Instance.GetSkillButtonEnable(0))
         {
+            UIManager.Instance.ResetSkillCountDownTime(0);
             SpawnTroopGO();
         }
     }

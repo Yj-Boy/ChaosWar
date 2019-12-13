@@ -28,8 +28,11 @@ public class SpawnTroopShooter : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E)
+            &&UIManager.Instance.GetSkillButtonEnable(1))
         {
+            Debug.Log(UIManager.Instance.GetSkillButtonEnable(1));
+            UIManager.Instance.ResetSkillCountDownTime(1);
             SpawnShooter();
         }
     }

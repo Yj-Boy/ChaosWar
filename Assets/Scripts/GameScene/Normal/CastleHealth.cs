@@ -61,6 +61,7 @@ public class CastleHealth : MonoBehaviour
             currentHealth -= amount;
         }       
         UIManager.Instance.UpdateHpSliderValue(currentHealth);
+        UIManager.Instance.ShowDamageImage();
     }
 
     //判断是否死亡接口

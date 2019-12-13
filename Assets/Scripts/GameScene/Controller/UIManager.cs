@@ -13,14 +13,14 @@ public class UIManager : MonoBehaviour
     {
         get
         {
-            if(instance==null)
+            if (instance == null)
             {
                 lock (threadSafeLock)
                 {
                     if (instance == null)
                     {
                         instance = new UIManager();
-                    }             
+                    }
                 }
             }
             return instance;
@@ -33,6 +33,10 @@ public class UIManager : MonoBehaviour
     public Slider goldSlider;               //金币条
     public Slider bossHpSlider;             //Boss血条
     public float sliderSpeed;               //slider变化速度
+    public Slider[] skillCountDownSlider;   //技能倒计时图片
+    public Button[] skillButton;            //技能按钮
+    public int[] skillTime;
+    public Image damageImage;               //受伤Image
 
     private float tmpHpSliderValue;         //血条中间转换值
     private float tmpGoldSliderValue;       //金币条中间转换值
@@ -46,7 +50,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        if(tipText==null)
+        if (tipText == null)
         {
             Debug.LogWarning(GetType() + "UIManager/Start()/tipText未设置!");
         }
@@ -55,7 +59,8 @@ public class UIManager : MonoBehaviour
             Debug.LogWarning(GetType() + "UIManager/Start()/castleHpSlider未设置!");
         }
 
-        tipText.gameObject.SetActive(false);        
+        tipText.gameObject.SetActive(false);
+        InitSkillCountDownTime();
     }
 
     public void Update()
@@ -64,6 +69,75 @@ public class UIManager : MonoBehaviour
         UpdateCastleHpSlider(tmpHpSliderValue);
         UpdateGoldSlider(tmpGoldSliderValue);
         UpdateBossSlider(tmpBossSliderValue);
+
+        //更新技能
+        UpdateSkillButton();
+        UpdateSkillCountDownSlider();
+    }
+
+    //显示受伤红色画面效果
+    public void ShowDamageImage()
+    {
+        damageImage.enabled = true;
+        Invoke("HideDamageImage", 0.1f);
+    }
+
+    //隐藏受伤红色画面效果
+    private void HideDamageImage()
+    {
+        damageImage.enabled = false;
+        CancelInvoke();
+    }
+
+    //获得技能enable
+    public bool GetSkillButtonEnable(int index)
+    {
+        return skillButton[index].enabled;
+    }
+
+    //更新技能
+    public void UpdateSkillButton()
+    {
+        for (int i = 0; i < skillButton.Length; i++)
+        {
+            if (skillCountDownSlider[i].value > 0)
+            {
+                skillButton[i].enabled = false;
+            }
+            else
+            {
+                skillButton[i].enabled = true;
+            }
+        }
+    }
+
+    //初始化节能冷却时间
+    private void InitSkillCountDownTime()
+    {
+        for (int i = 0; i < skillCountDownSlider.Length; i++)
+        {
+            skillCountDownSlider[i].maxValue = 0;
+            skillCountDownSlider[i].value = 0;
+        }       
+    }
+
+    //重置技能冷却时间
+    public void ResetSkillCountDownTime(int index)
+    {
+        skillCountDownSlider[index].maxValue = skillTime[index];
+        skillCountDownSlider[index].value = skillTime[index];
+    }
+
+    //更新冷却时间
+    public void UpdateSkillCountDownSlider()
+    {
+        for(int i=0;i<skillButton.Length;i++)
+        {
+            if(skillCountDownSlider[i].value>0)
+            {
+                skillCountDownSlider[i].value -= Time.deltaTime;
+            }
+        }
     }
 
     //初始化Boss血条的值
