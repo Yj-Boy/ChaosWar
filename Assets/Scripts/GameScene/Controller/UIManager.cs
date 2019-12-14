@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     public Button[] skillButton;            //技能按钮
     public int[] skillTime;
     public Image damageImage;               //受伤Image
+    public Text winOrLoseText;
 
     private float tmpHpSliderValue;         //血条中间转换值
     private float tmpGoldSliderValue;       //金币条中间转换值
@@ -73,6 +74,26 @@ public class UIManager : MonoBehaviour
         //更新技能
         UpdateSkillButton();
         UpdateSkillCountDownSlider();
+    }
+
+    //显示胜败Text
+    public void ShowWinOrLoseText(bool isWin)
+    {
+        winOrLoseText.enabled = true;
+        if (isWin)
+        {
+            winOrLoseText.text = "You Win!";
+        }
+        else
+        {
+            winOrLoseText.text = "You Lose!";
+        }    
+    }
+
+    //隐藏胜败Text
+    public void HideWinOrLoseText()
+    {
+        winOrLoseText.enabled = false;
     }
 
     //显示受伤红色画面效果

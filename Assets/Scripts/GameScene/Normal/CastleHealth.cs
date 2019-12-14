@@ -43,6 +43,14 @@ public class CastleHealth : MonoBehaviour
         UIManager.Instance.InitCastleHpSlider(currentHealth);
     }
 
+    private void Update()
+    {
+        if(IsDead())
+        {
+            UIManager.Instance.ShowWinOrLoseText(false);
+        }
+    }
+
     //加血接口
     public void AddHealth(int amount)
     {

@@ -74,5 +74,6 @@ public class BossHpController : MonoBehaviour
     private void Death()
     {
         //死亡的相关操作
+        UIManager.Instance.ShowWinOrLoseText(true);
     }
 }
