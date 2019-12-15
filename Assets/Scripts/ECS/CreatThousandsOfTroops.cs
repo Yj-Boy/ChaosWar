@@ -44,6 +44,7 @@ public class CreatThousandsOfTroops : MonoBehaviour
     public Transform goTrans;               //烟尘位置
     public GameObject goLithtEffect;        //生成大招光效
     public Transform goLightTrans;         //生成大招光效位置
+    public GameObject goColliders;          //千军万马碰撞器
 
     private void Start()
     {
@@ -150,17 +151,21 @@ public class CreatThousandsOfTroops : MonoBehaviour
         ShakeCamera.SetCameraShake(2.8f,0.1f,0.3f);
         //GameObject.Find("_script").GetComponent<ShakeCamera>().SetCameraShakeTime(10f);
 
+        //添加碰撞器
+        CreateColliders();
         //添加烟尘效果     
         CreateDustTrail();
         //添加光效
         CreateLightEffect();
     }
 
+    private void CreateColliders()
+    {
+        Instantiate(goColliders, goTrans);
+    }
+
     private void CreateDustTrail()
     {    
-        //Vector3 pos = goTrans.position; 
-        //pos.z = -88;
-        //goTrans.position = pos;
         Instantiate(goDustTrail, goTrans);
     }
 

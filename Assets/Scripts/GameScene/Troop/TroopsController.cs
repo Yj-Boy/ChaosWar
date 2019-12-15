@@ -31,8 +31,9 @@ public class TroopsController : MonoBehaviour
 
     public CapsuleCollider swordCollider; //剑的碰撞脚本
 
+    public GameObject sacrificeParticle;  //献祭特效
+
     private int devilHeadIndex;         //攻击对象的索引
-    
 
     private float timer;                //距离上一次攻击时间间隔的时间
 
@@ -166,7 +167,7 @@ public class TroopsController : MonoBehaviour
         {
             animator.SetBool("IsWalk", false);
             animator.SetBool("IsRun", true);
-            tmpVc3.y += 2f;
+            tmpVc3.y += 3f;
             transform.position = Vector3.Lerp(
             transform.position,
             tmpVc3,
@@ -313,22 +314,25 @@ public class TroopsController : MonoBehaviour
         troopState = TroopState.GetHit;
     }
 
-    /*
-     *  碰撞检测
-     */
+    /// <summary>
+    /// 碰撞检测
+    /// </summary>
+    /// <param name="other"></param>
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("BossAttackTarget"))
         {
-            Destroy(gameObject);
+            GameObject go = Instantiate(sacrificeParticle, transform);
+            go.transform.SetParent(null);
+            Destroy(gameObject);        
             BossHpController.Instance.SubHp(sacrificeDamage);
         }
     }
 
-    /*
-     *  动画调用接口 
-     */
+    /// <summary>
+    /// 动画接口
+    /// </summary>
 
     //造成伤害的公有接口
     public void AnimTakeDamage()

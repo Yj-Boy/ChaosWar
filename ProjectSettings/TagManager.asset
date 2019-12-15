@@ -12,6 +12,7 @@ TagManager:
   - FxTemporaire
   - CastleAttackTarget
   - BossAttackTarget
+  - TroopECSCollider
   layers:
   - Default
   - TransparentFX

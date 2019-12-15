@@ -46,15 +46,13 @@ public class BossController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnTriggerEnter:boss");
-        bossAnimator.SetTrigger("BossHurt");
+        //Debug.Log("OnTriggerEnter:boss");
+        if(other.CompareTag("TroopECSCollider"))
+        {
+            bossAnimator.SetTrigger("BossHurt");
+            BossHpController.Instance.SubHp(20);
+        }
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    Debug.Log("OnCollisionEnter:boss");
-    //    bossAnimator.SetBool("BossHurt", true);
-    //}
 
     void LaunchBossMainSkill()
     {

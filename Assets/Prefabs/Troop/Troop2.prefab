@@ -1113,6 +1113,8 @@ MonoBehaviour:
   timeBetweenAttack: 2.5
   sacrificeDamage: 20
   swordCollider: {fileID: 284950600}
+  sacrificeParticle: {fileID: 8608276832004023337, guid: 94f9bc2e195c82d4db861e3fc343328c,
+    type: 3}
 --- !u!54 &1365642204188115699
 Rigidbody:
   m_ObjectHideFlags: 0
