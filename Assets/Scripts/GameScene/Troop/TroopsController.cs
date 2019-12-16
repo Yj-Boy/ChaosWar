@@ -132,14 +132,14 @@ public class TroopsController : MonoBehaviour
     private void Idle()
     {
         if (devilHeadList.childCount == 0 && targetDevilHead == null
-            || transform.position.z > 0)
+            || transform.position.z > -10)
         {
             MoveToBossAttackTarget();
         }
         //如果攻击对象列表不为空且攻击目标为空，则从攻击对象列表中随机一个
         else if (devilHeadList.childCount>0
             &&targetDevilHead==null
-            &&transform.position.z<=0)
+            &&transform.position.z<=-10)
         {
             animator.SetBool("IsRun", false);
             devilHeadIndex = Random.Range(0, devilHeadList.childCount);
@@ -323,6 +323,7 @@ public class TroopsController : MonoBehaviour
     {
         if (other.CompareTag("BossAttackTarget"))
         {
+            other.GetComponentInParent<Animator>().SetTrigger("BossHurt");
             GameObject go = Instantiate(sacrificeParticle, transform);
             go.transform.SetParent(null);
             Destroy(gameObject);        

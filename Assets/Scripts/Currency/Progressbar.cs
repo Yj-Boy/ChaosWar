@@ -14,6 +14,14 @@ public class Progressbar : MonoBehaviour
     public Slider slider;               //进度条
     public Text text;                   //进度
 
+    public Image darkImage;
+    public Color darkColor;
+
+    public GameObject fire;
+    public GameObject fireParent;
+
+    public Vector3 darkImageScale;
+
     private float tempProgress;
 
     private void Start()
@@ -36,21 +44,57 @@ public class Progressbar : MonoBehaviour
 
     private void Update()
     {
+        
+
         if (text && slider)
         {
             //更新Loading进度条和加载数字
-            tempProgress = Mathf.Lerp(tempProgress, asyn.progress, Time.deltaTime);
+            tempProgress = Mathf.Lerp(tempProgress, asyn.progress, 0.6f*Time.deltaTime);
             text.text = ((int)(tempProgress / 9 * 10 * 100)).ToString() + "%";
             slider.value = tempProgress / 9 * 10;
 
             if (slider.value >= 0.99)
-            {
+            {              
                 tempProgress = 1;
                 text.text = 100 + "%";
                 slider.value = 100 / 9 * 10;
-                asyn.allowSceneActivation = true;
-            }
 
+                FinalLoading();
+            }
         }
+    }
+
+    private void FinalLoading()
+    {
+        darkImage.color = Color.Lerp(
+            darkImage.color,
+            darkColor,
+            0.7f*Time.deltaTime
+            );
+        darkImage.rectTransform.localScale = Vector3.Lerp(
+            darkImage.rectTransform.localScale,
+            darkImageScale,
+            0.7f*Time.deltaTime
+            );
+
+        fire.transform.localScale = Vector3.Lerp(
+            fire.transform.localScale,
+            new Vector3(0, 0, 0),
+            Time.deltaTime
+            );
+
+        fireParent.transform.position = Vector3.Lerp(
+            fireParent.transform.position,
+            new Vector3(0, 1, -20),
+            Time.deltaTime
+            );
+
+        Invoke("SetallowSceneActivationTrue", 4f);
+    }
+
+    private void SetallowSceneActivationTrue()
+    {
+        asyn.allowSceneActivation = true;
+        CancelInvoke();
     }
 }

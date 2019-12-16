@@ -37,12 +37,14 @@ public class UIManager : MonoBehaviour
     public Button[] skillButton;            //技能按钮
     public int[] skillTime;
     public Image damageImage;               //受伤Image
-    public Text winOrLoseText;
+    public Text winOrLoseText;              //胜负文字提示
+    public Image twinkleImage;              //濒临死亡闪烁画面
 
     private float tmpHpSliderValue;         //血条中间转换值
     private float tmpGoldSliderValue;       //金币条中间转换值
     private float tmpBossSliderValue;       //Boss血条中间转换值
-
+    private float twinkleValue;             //闪烁画面的数值
+    private Color color;                    //闪烁颜色变化
     //方法
     private void Awake()
     {
@@ -62,6 +64,8 @@ public class UIManager : MonoBehaviour
 
         tipText.gameObject.SetActive(false);
         InitSkillCountDownTime();
+
+        color = twinkleImage.color;
     }
 
     public void Update()
@@ -74,6 +78,39 @@ public class UIManager : MonoBehaviour
         //更新技能
         UpdateSkillButton();
         UpdateSkillCountDownSlider();
+
+        //濒临死亡画面闪烁
+        ShowTwinkleImage();
+    }
+
+    //濒临死亡画面闪烁
+    private void ShowTwinkleImage()
+    {
+        if (castleHpSlider.value <= 20)
+        {
+            if (color.a >= 0.045f)
+            {
+                twinkleValue = 0;
+            }
+            if (color.a <= 0.01f)
+            {
+                twinkleValue = 0.05f;
+            }
+            color.a = Mathf.Lerp(
+                color.a,
+                twinkleValue,
+                2.5f * Time.deltaTime
+                );
+            twinkleImage.color = color;
+        }      
+        else
+        {
+            if(color.a!=0)
+            {
+                color.a = 0;
+                twinkleImage.color = color;
+            }         
+        }
     }
 
     //显示胜败Text

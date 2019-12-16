@@ -141,6 +141,9 @@
     <Reference Include="Unity.Properties">
       <HintPath>D:/GraduationProject/ChaosWar/Library/ScriptAssemblies/Unity.Properties.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>D:/GraduationProject/ChaosWar/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Entities">
       <HintPath>D:/GraduationProject/ChaosWar/Library/ScriptAssemblies/Unity.Entities.dll</HintPath>
     </Reference>
