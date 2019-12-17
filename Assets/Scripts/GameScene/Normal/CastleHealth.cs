@@ -47,7 +47,8 @@ public class CastleHealth : MonoBehaviour
     {
         if(IsDead())
         {
-            UIManager.Instance.ShowWinOrLoseText(false);
+            UIManager.Instance.ShowGameOver(false);
+            //UIManager.Instance.ShowWinOrLoseText(false);
         }
     }
 

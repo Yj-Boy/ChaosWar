@@ -22,11 +22,16 @@ public class Progressbar : MonoBehaviour
 
     public Vector3 darkImageScale;
 
+    public AudioSource bgm;
+    public AudioSource finishSource;
+
     private float tempProgress;
 
     private void Start()
     {
         tempProgress = 0;
+        nextLevel = "GameScene";
+
         if (SceneManager.GetActiveScene().name == "LoadingScene")//如果当前活跃场景是Loading，异步加载下一个场景
         {
             asyn = SceneManager.LoadSceneAsync(nextLevel);
@@ -44,10 +49,9 @@ public class Progressbar : MonoBehaviour
 
     private void Update()
     {
-        
-
         if (text && slider)
         {
+            Debug.Log("======");
             //更新Loading进度条和加载数字
             tempProgress = Mathf.Lerp(tempProgress, asyn.progress, 0.6f*Time.deltaTime);
             text.text = ((int)(tempProgress / 9 * 10 * 100)).ToString() + "%";
@@ -89,7 +93,13 @@ public class Progressbar : MonoBehaviour
             Time.deltaTime
             );
 
-        Invoke("SetallowSceneActivationTrue", 4f);
+        bgm.Stop();
+        if(finishSource.isPlaying==false)
+        {
+            finishSource.Play();
+        }
+        
+        Invoke("SetallowSceneActivationTrue", 2f);
     }
 
     private void SetallowSceneActivationTrue()

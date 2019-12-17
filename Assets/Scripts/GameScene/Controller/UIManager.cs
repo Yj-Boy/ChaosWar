@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -38,7 +39,9 @@ public class UIManager : MonoBehaviour
     public int[] skillTime;
     public Image damageImage;               //受伤Image
     public Text winOrLoseText;              //胜负文字提示
+    public GameObject gameOver;             //游戏结束界面
     public Image twinkleImage;              //濒临死亡闪烁画面
+    public GameObject pausePanel;           //暂停面板
 
     private float tmpHpSliderValue;         //血条中间转换值
     private float tmpGoldSliderValue;       //金币条中间转换值
@@ -83,6 +86,48 @@ public class UIManager : MonoBehaviour
         ShowTwinkleImage();
     }
 
+    //暂停游戏接口
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    //继续游戏接口
+    public void ContinueGame()
+    {
+        Time.timeScale = 1;
+    }
+
+    //返回主界面
+    public void BackStartScene()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
+
+    //显示暂停面板
+    public void ShowPausePanel()
+    {
+        pausePanel.SetActive(true);
+    }
+
+    //隐藏暂停面板
+    public void HidePausePanel()
+    {
+        pausePanel.SetActive(false);
+    }
+
+    //重新开始接口
+    public void ReStart()
+    {      
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+    //退出游戏接口
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
     //濒临死亡画面闪烁
     private void ShowTwinkleImage()
     {
@@ -111,6 +156,14 @@ public class UIManager : MonoBehaviour
                 twinkleImage.color = color;
             }         
         }
+    }
+
+    //显示游戏结束画面
+    public void ShowGameOver(bool resule)
+    {
+        PauseGame();
+        gameOver.SetActive(true);
+        ShowWinOrLoseText(resule);
     }
 
     //显示胜败Text
