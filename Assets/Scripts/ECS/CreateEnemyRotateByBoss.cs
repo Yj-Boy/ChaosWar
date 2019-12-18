@@ -53,7 +53,8 @@ public class CreateEnemyRotateByBoss : MonoBehaviour
             typeof(FloatingComponent),
             typeof(Scale),
             typeof(RenderMesh),
-            typeof(LocalToWorld)
+            typeof(LocalToWorld),
+            typeof(IsDestroyComponent)
             );
 
         //创建实体数组
@@ -121,6 +122,11 @@ public class CreateEnemyRotateByBoss : MonoBehaviour
             entityManager.SetComponentData(entityArr[i], new Scale
             {
                 Value = 10
+            });
+
+            entityManager.SetComponentData(entityArr[i], new IsDestroyComponent
+            {
+                value = false
             });
 
             entityManager.SetSharedComponentData(entityArr[i], new RenderMesh

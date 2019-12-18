@@ -1109,7 +1109,7 @@ MonoBehaviour:
   runSpeed: 0.3
   rotateSpeed: 1.5
   attackRange: 13
-  runAngleRange: 14
+  runAngleRange: 20
   timeBetweenAttack: 2.5
   sacrificeDamage: 20
   swordCollider: {fileID: 284950600}
@@ -1124,8 +1124,8 @@ Rigidbody:
   m_GameObject: {fileID: 2660232292610962779}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0

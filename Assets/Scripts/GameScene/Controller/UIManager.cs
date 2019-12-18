@@ -101,6 +101,7 @@ public class UIManager : MonoBehaviour
     //返回主界面
     public void BackStartScene()
     {
+        ContinueGame();
         SceneManager.LoadScene("StartScene");
     }
 
@@ -108,6 +109,8 @@ public class UIManager : MonoBehaviour
     public void ShowPausePanel()
     {
         pausePanel.SetActive(true);
+        gameOver.GetComponent<AudioSource>().Stop();
+        pausePanel.GetComponent<AudioSource>().Play();      
     }
 
     //隐藏暂停面板
@@ -118,7 +121,8 @@ public class UIManager : MonoBehaviour
 
     //重新开始接口
     public void ReStart()
-    {      
+    {
+        ContinueGame();
         SceneManager.LoadScene("LoadingScene");
     }
 
@@ -161,9 +165,13 @@ public class UIManager : MonoBehaviour
     //显示游戏结束画面
     public void ShowGameOver(bool resule)
     {
-        PauseGame();
         gameOver.SetActive(true);
+        gameOver.GetComponent<AudioSource>().time = 0.2f;
+        gameOver.GetComponent<AudioSource>().Stop();
+        gameOver.GetComponent<AudioSource>().Play();
+        
         ShowWinOrLoseText(resule);
+       // PauseGame();
     }
 
     //显示胜败Text

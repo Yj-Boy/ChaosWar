@@ -68,7 +68,7 @@ public class SpawnDevilHead : MonoBehaviour
             //实例化对象
             //Debug.Log("spawnTrans:" + spawnTrans[i].position.y);
             devilHeadGO = Instantiate(goPrefab, spawnTrans[i]);
-            devilHeadGO.transform.parent = parentTrans;
+            //devilHeadGO.transform.parent = parentTrans;
 
             //实例化魔法阵
             magicCirleTrans = spawnTrans[i];

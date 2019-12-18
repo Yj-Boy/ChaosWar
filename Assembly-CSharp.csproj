@@ -88,9 +88,11 @@
     <Compile Include="Assets\Scripts\ECS\CreateWallToDestroy.cs" />
     <Compile Include="Assets\Scripts\ECS\CreatThousandsOfTroops.cs" />
     <Compile Include="Assets\Scripts\ECS\DestorySystem.cs" />
+    <Compile Include="Assets\Scripts\ECS\DestorySystem2.cs" />
     <Compile Include="Assets\Scripts\ECS\FloatingComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\FloatingSystem.cs" />
     <Compile Include="Assets\Scripts\ECS\IsDestroyComponent.cs" />
+    <Compile Include="Assets\Scripts\ECS\JudgeDestoryECS.cs" />
     <Compile Include="Assets\Scripts\ECS\MoveForwardComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\MovementSystem.cs" />
     <Compile Include="Assets\Scripts\ECS\MoveSpeedComponent.cs" />

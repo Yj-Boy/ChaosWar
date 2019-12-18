@@ -11,6 +11,7 @@ public class EnemyAttack : MonoBehaviour
     public float timeBetweenAttack;         //进攻时间间隔
     public ParticleSystem attackParticles;  //攻击粒子特效
     public int attackCastleNum;
+    public GameObject sacrificeParticle;    //献祭特效
 
     private Transform troops;               //攻击目标的父对象
     private Transform targetTroop;          //当前攻击目标
@@ -37,8 +38,16 @@ public class EnemyAttack : MonoBehaviour
     {
         if(other.CompareTag("CastleAttackTarget"))
         {
+            GameObject go = Instantiate(sacrificeParticle,transform);
+            go.transform.SetParent(null);
+            other.GetComponent<AudioSource>().Play();
             CastleHealth.Instance.SubHealth(attackCastleNum);
             ShakeCamera.Instance.StartShakeCamera();
+            Destroy(gameObject);
+        }
+        if (other.CompareTag("TroopECSCollider"))
+        {
+            Debug.Log("===================");
             Destroy(gameObject);
         }
     }

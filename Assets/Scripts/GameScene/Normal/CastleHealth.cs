@@ -43,7 +43,7 @@ public class CastleHealth : MonoBehaviour
         UIManager.Instance.InitCastleHpSlider(currentHealth);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if(IsDead())
         {

@@ -29,6 +29,7 @@ public class Progressbar : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         tempProgress = 0;
         nextLevel = "GameScene";
 
@@ -50,10 +51,15 @@ public class Progressbar : MonoBehaviour
     private void Update()
     {
         if (text && slider)
-        {
-            Debug.Log("======");
+        {          
             //更新Loading进度条和加载数字
-            tempProgress = Mathf.Lerp(tempProgress, asyn.progress, 0.6f*Time.deltaTime);
+            Debug.Log("======");
+
+            tempProgress = Mathf.Lerp(
+                tempProgress,
+                asyn.progress,
+                0.6f * Time.deltaTime);
+
             text.text = ((int)(tempProgress / 9 * 10 * 100)).ToString() + "%";
             slider.value = tempProgress / 9 * 10;
 

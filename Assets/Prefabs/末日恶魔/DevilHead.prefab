@@ -4824,7 +4824,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 3
-  m_Speed: 8
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -4907,6 +4907,8 @@ MonoBehaviour:
   timeBetweenAttack: 4
   attackParticles: {fileID: 465377020}
   attackCastleNum: 20
+  sacrificeParticle: {fileID: 123232460254976186, guid: 8f6c6231cac00404c915f45871a33cea,
+    type: 3}
 --- !u!95 &3233933368530373049
 Animator:
   serializedVersion: 3

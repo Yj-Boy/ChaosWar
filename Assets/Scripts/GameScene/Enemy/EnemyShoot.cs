@@ -75,9 +75,8 @@ public class EnemyShoot : MonoBehaviour
                 //Debug.Log("transform.rotation:" + transform.rotation);
 
                 //Debug.Log("angle:" + Vector3.Angle(transform.forward, targetVec));
-                if (Vector3.Angle(transform.forward, targetVec) <= 12)
+                if (Vector3.Angle(transform.forward, targetVec) <= 30)
                 {
-
                     //累计timer，若大于射击间隔，进行一次射击并造成伤害
                     timer += Time.deltaTime;
                     if (timer >= timeBetweenAttack)
@@ -92,7 +91,6 @@ public class EnemyShoot : MonoBehaviour
                             lineRender.enabled = false;
                             targetTroopShooter = null;
                         }
-
                         timer = 0f;
                     }
                 }

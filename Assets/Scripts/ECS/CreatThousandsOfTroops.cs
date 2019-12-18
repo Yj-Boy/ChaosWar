@@ -115,7 +115,7 @@ public class CreatThousandsOfTroops : MonoBehaviour
             });
             entityManager.SetComponentData(entityArr[i], new TimeToLiveComponent
             {
-                value = 30f
+                value = 15f
             });
             entityManager.SetComponentData(entityArr[i], new Scale
             {
@@ -171,7 +171,11 @@ public class CreatThousandsOfTroops : MonoBehaviour
 
     private void CreateLightEffect()
     {
-        Instantiate(goLithtEffect, goLightTrans);
+        GameObject go = Instantiate(goLithtEffect, goLightTrans);
+        for(int i=0;i<go.transform.childCount;i++)
+        {
+            go.transform.GetChild(i).GetComponent<Animation>().Play();
+        }
     }
 
     public void SpawnEntityByHyBrid()

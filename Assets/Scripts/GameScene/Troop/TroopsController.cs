@@ -161,7 +161,7 @@ public class TroopsController : MonoBehaviour
         transform.rotation = Quaternion.Lerp(
             transform.rotation,
             Quaternion.LookRotation(tmpVc3),
-            rotateSpeed * Time.deltaTime
+            1.0f * Time.deltaTime
             );
         if (Vector3.Angle(transform.forward, tmpVc3) <= runAngleRange)
         {
@@ -171,7 +171,7 @@ public class TroopsController : MonoBehaviour
             transform.position = Vector3.Lerp(
             transform.position,
             tmpVc3,
-            runSpeed * Time.deltaTime
+            0.2f * Time.deltaTime
             );
         }  
     }
@@ -222,7 +222,7 @@ public class TroopsController : MonoBehaviour
                 );
 
             tmpVc3 = targetDevilHead.position;
-            tmpVc3.y = transform.position.y;
+            tmpVc3.y -= 1f;
             transform.position = Vector3.Lerp(
                 transform.position,
                 tmpVc3,
@@ -328,6 +328,10 @@ public class TroopsController : MonoBehaviour
             go.transform.SetParent(null);
             Destroy(gameObject);        
             BossHpController.Instance.SubHp(sacrificeDamage);
+        }
+        if(other.CompareTag("TroopECSCollider"))
+        {
+            Destroy(gameObject);
         }
     }
 

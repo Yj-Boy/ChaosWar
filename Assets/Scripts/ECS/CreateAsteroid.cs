@@ -64,7 +64,8 @@ public class CreateAsteroid : MonoBehaviour
             typeof(Rotation),
             typeof(Scale),
             typeof(MeshRenderer),
-            typeof(LocalToWorld)
+            typeof(LocalToWorld),
+            typeof(IsDestroyComponent)
             );
         
         //创建实体数组
@@ -104,6 +105,10 @@ public class CreateAsteroid : MonoBehaviour
             entityManager.SetComponentData(entityArr[i], new Scale
             {
                 Value = 0.65f
+            });
+            entityManager.SetComponentData(entityArr[i], new IsDestroyComponent
+            {
+                value = false
             });
             int renderMeshNum = UnityEngine.Random.Range(0, 3);
             switch(renderMeshNum)

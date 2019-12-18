@@ -62,6 +62,7 @@ public class CollisionSystem : JobComponentSystem
                     //判断是否碰撞
                     if (CheckCollision2(pos.Value, pos2.Value, 2))
                     {
+                        Debug.Log("xxxxxxxxxxxxxxxxxx");
                         isDestroy.value = true;
                     }
                 }
@@ -86,17 +87,19 @@ public class CollisionSystem : JobComponentSystem
             transToTestAgainst = wallGroup.ToComponentDataArray<Translation>(Allocator.TempJob)
         };
 
-        JobHandle jobHandle = jobEvB.Schedule(troopsGroup, inputDependencies);
+        JobHandle jobHandle;
+        return jobHandle = jobEvB.Schedule(troopsGroup, inputDependencies);
 
-        var jobPvE = new CollisionJob()
-        {
-            //radius = playerRadius * playerRadius,
-            isDestroyType = isDestroyType,
-            translationType = translationType,
-            transToTestAgainst = troopsGroup.ToComponentDataArray<Translation>(Allocator.TempJob)
-        };
+        //注释检测销毁碰撞墙的代码
+        //var jobPvE = new CollisionJob()
+        //{
+        //    //radius = playerRadius * playerRadius,
+        //    isDestroyType = isDestroyType,
+        //    translationType = translationType,
+        //    transToTestAgainst = troopsGroup.ToComponentDataArray<Translation>(Allocator.TempJob)
+        //};
 
-        return jobPvE.Schedule(wallGroup, jobHandle);
+        //return jobPvE.Schedule(wallGroup, jobHandle);
     }
 
     //检测是否碰撞方法（圆形相交检测）
