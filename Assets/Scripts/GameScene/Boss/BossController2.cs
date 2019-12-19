@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossController : MonoBehaviour
+public class BossController2: MonoBehaviour
 {
     public Animator bossAnimator;           //Boss状态机
     public float mainSkillTime;             //Boss大招释放到结束总时间
@@ -15,11 +15,11 @@ public class BossController : MonoBehaviour
     void Start()
     {
         //参数检查
-        if(bossAnimator==null)
+        if (bossAnimator == null)
         {
             Debug.Log(GetType() + "/Start/Boss状态机BossAnimator没有指定！");
         }
-        if(mainSkillTime == 0f)
+        if (mainSkillTime == 0f)
         {
             Debug.Log(GetType() + "/Start/Boss大招时间MainSkillTime没有设定或者为0！");
         }
@@ -33,7 +33,7 @@ public class BossController : MonoBehaviour
         if (GameObject.Find("_ECSscript").GetComponent<CreateBossMainSkill>().GetLaunch())
         {
             tmpSkillTime += Time.deltaTime;
-            if(tmpSkillTime>mainSkillTime)
+            if (tmpSkillTime > mainSkillTime)
             {
                 //CreateBossMainSkill.Stop();
                 GameObject.Find("_ECSscript").GetComponent<CreateBossMainSkill>().Stop();
@@ -47,24 +47,30 @@ public class BossController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("OnTriggerEnter:boss");
-        if(other.CompareTag("TroopECSCollider"))
+        if (other.CompareTag("TroopECSCollider"))
         {
             bossAnimator.SetTrigger("BossHurt");
             BossHpController.Instance.SubHp(20);
         }
     }
 
-    void LaunchBossMainSkill()
+    public void CheckToAttack()
     {
         int rangeNum = Random.Range(0, 100);
-        if(rangeNum>0&&rangeNum<=30)
+        if (rangeNum > 0 && rangeNum <= 5)
         {
             bossAnimator.SetBool("BossAttack", true);
-            //CreateBossMainSkill.Launch();
-            GameObject.Find("_ECSscript").GetComponent<CreateBossMainSkill>().Launch();
-            Debug.Log("MainSkillLaunch!");
+            //CreateBossMainSkill.Launch();          
         }
     }
+
+    public void LaunchBossMainSkill()
+    {
+        GameObject.Find("_ECSscript").GetComponent<CreateBossMainSkill>().Launch();
+        //Debug.Log("MainSkillLaunch!");
+        UIManager.Instance.ShowHurtTipShake();
+    }
+
 
     void AnimatorToIdle()
     {

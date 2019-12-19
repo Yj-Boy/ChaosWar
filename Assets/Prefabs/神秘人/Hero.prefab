@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1634851593}
   - component: {fileID: 1634851592}
-  - component: {fileID: 1634851591}
   - component: {fileID: 1634851594}
   m_Layer: 0
   m_Name: HeadCamera
@@ -76,14 +75,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1634851591
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1634851590}
-  m_Enabled: 1
 --- !u!45 &1634851594
 Skybox:
   m_ObjectHideFlags: 0

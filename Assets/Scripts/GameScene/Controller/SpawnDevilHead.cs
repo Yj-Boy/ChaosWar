@@ -17,25 +17,7 @@ public class SpawnDevilHead : MonoBehaviour
     void Start()
     {
         //参数检查
-        if(spawnTrans==null)
-        {
-            Debug.Log(GetType() + "SpawnDevilHead/Start()/spwnTrans没有设置！");
-        }
-
-        if (goPrefab == null)
-        {
-            Debug.Log(GetType() + "SpawnDevilHead/Start()/goPrefab没有设置！");
-        }
-
-        if (magicCircle == null)
-        {
-            Debug.Log(GetType() + "SpawnDevilHead/Start()/magicCircle没有设置！");
-        }
-
-        if(heartBeatTime==0)
-        {
-            Debug.Log(GetType() + "SpawnDevilHead/Start()/heartBeatTime为0！请设置！");
-        }
+        CheckValue();
 
         //参数初始化
         timer = heartBeatTime;
@@ -56,6 +38,14 @@ public class SpawnDevilHead : MonoBehaviour
             if(parentTrans.childCount<=0)
             {
                 SpawnDevilHeadGO();
+            }
+            else
+            {
+                int i = Random.Range(0, 100);
+                if(i<20)
+                {
+                    SpawnDevilHeadGO();
+                }
             }
             timer = 0;
         }
@@ -79,5 +69,29 @@ public class SpawnDevilHead : MonoBehaviour
             Instantiate(magicCircle, magicCirleTrans);
             spawnTrans[i].position = beforVec3;
         }          
+    }
+
+    //参数检查接口
+    private void CheckValue()
+    {
+        if (spawnTrans == null)
+        {
+            Debug.Log(GetType() + "SpawnDevilHead/Start()/spwnTrans没有设置！");
+        }
+
+        if (goPrefab == null)
+        {
+            Debug.Log(GetType() + "SpawnDevilHead/Start()/goPrefab没有设置！");
+        }
+
+        if (magicCircle == null)
+        {
+            Debug.Log(GetType() + "SpawnDevilHead/Start()/magicCircle没有设置！");
+        }
+
+        if (heartBeatTime == 0)
+        {
+            Debug.Log(GetType() + "SpawnDevilHead/Start()/heartBeatTime为0！请设置！");
+        }
     }
 }

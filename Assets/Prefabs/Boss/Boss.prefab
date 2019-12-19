@@ -621,7 +621,7 @@ Transform:
   - {fileID: 5780526718086291269}
   m_Father: {fileID: 3918708903695555678}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 76.85674, y: -42.59103, z: -117.71278}
+  m_LocalEulerAnglesHint: {x: 71.49604, y: 51.764244, z: -2.2275343}
 --- !u!1 &5027141601259114344
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,8 +634,8 @@ GameObject:
   - component: {fileID: 2094917919126392833}
   - component: {fileID: 3954745072316847739}
   - component: {fileID: 3954745072316847738}
-  - component: {fileID: 3954745072316847740}
   - component: {fileID: 3954745072316847736}
+  - component: {fileID: 6646436376286108162}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -713,20 +713,6 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.2, z: 0}
---- !u!114 &3954745072316847740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5027141601259114344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a53c50106f14c7948b895f9cf5b7bb31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bossAnimator: {fileID: 2094917919126392833}
-  mainSkillTime: 10
 --- !u!114 &3954745072316847736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,6 +726,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 200
+--- !u!114 &6646436376286108162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5027141601259114344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ac3f943458f4a48af09bcd2646dbc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossAnimator: {fileID: 2094917919126392833}
+  mainSkillTime: 10
 --- !u!1 &5124938071967526703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1038,7 @@ Transform:
   - {fileID: 3474249779414924835}
   m_Father: {fileID: 4291811137609267517}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -27.561672, y: 102.24927, z: -33.006195}
+  m_LocalEulerAnglesHint: {x: -47.604137, y: 80.31242, z: -32.72664}
 --- !u!1 &8245407295758932418
 GameObject:
   m_ObjectHideFlags: 0

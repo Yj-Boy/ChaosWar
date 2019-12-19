@@ -47,6 +47,8 @@ public class CreateBossMainSkill : MonoBehaviour
     [SerializeField]
     private Material _material;     //渲染实体的材质
 
+    public GameObject bossMainSkillCube; //Boss大招碰撞盒
+
     EntityManager entityManager;    //实体管理对象
     private void Start()
     {
@@ -54,7 +56,7 @@ public class CreateBossMainSkill : MonoBehaviour
         times = 0;
         isLaunch = false;
         position = bossTrans.position;
-        position.y += 10;
+        position.y += 0;
     }
 
     private void Update()
@@ -76,6 +78,7 @@ public class CreateBossMainSkill : MonoBehaviour
         isLaunch = true;
         times = 0;
         //Debug.Log("CreateBossMainSkill/Launch==="+"isLaunch:"+isLaunch+"===times:"+times);
+        CreateColliderCube();
     }
 
     public void Stop()
@@ -98,6 +101,7 @@ public class CreateBossMainSkill : MonoBehaviour
             typeof(RotateByOnePointComponent),
             typeof(TimeToLiveComponent),
             typeof(IsDestroyComponent),
+            typeof(Scale),
             typeof(RenderMesh),
             typeof(LocalToWorld)
             );
@@ -138,6 +142,10 @@ public class CreateBossMainSkill : MonoBehaviour
             entityManager.SetComponentData(entityArr[i], new TimeToLiveComponent {
                 value = 10f
             });
+            entityManager.SetComponentData(entityArr[i], new Scale
+            {
+                Value = 5f
+            });
             entityManager.SetSharedComponentData(entityArr[i], new RenderMesh
             {
                 mesh = _mesh,
@@ -145,5 +153,14 @@ public class CreateBossMainSkill : MonoBehaviour
             });
         }
         entityArr.Dispose();
+    }
+
+    private void CreateColliderCube()
+    {
+        Transform trans = bossTrans;
+        Vector3 pos = trans.position;
+        pos.z += 20;
+        trans.position = pos;
+        Instantiate(bossMainSkillCube, trans.position,trans.rotation);
     }
 }

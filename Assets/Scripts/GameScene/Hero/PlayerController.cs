@@ -37,11 +37,24 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         MoveHero();
-        if(Input.GetKeyDown(KeyCode.Space)
+        if(Input.GetKeyDown(KeyCode.R)
             &&UIManager.Instance.GetSkillButtonEnable(2))
         {
-            UIManager.Instance.ResetSkillCountDownTime(2);
-            ButtonLaunchThousandsOfTroops();
+            if (GoldManager.Instance.SubGold(20))
+            {
+                UIManager.Instance.ResetSkillCountDownTime(2);
+                ButtonLaunchThousandsOfTroops();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E)
+            && UIManager.Instance.GetSkillButtonEnable(3))
+        {
+            if (GoldManager.Instance.SubGold(20))
+            {
+                UIManager.Instance.ResetSkillCountDownTime(3);
+                CastleHealth.Instance.AddHealth(20);
+            }
         }
     }
 

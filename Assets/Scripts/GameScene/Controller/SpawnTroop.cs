@@ -18,24 +18,27 @@ public class SpawnTroop : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.W)
+        if(Input.GetKeyDown(KeyCode.Q)
             &&UIManager.Instance.GetSkillButtonEnable(0))
         {
-            UIManager.Instance.ResetSkillCountDownTime(0);
-            SpawnTroopGO();
+            if (goldManager.SubGold(needGold))
+            {
+                UIManager.Instance.ResetSkillCountDownTime(0);
+                SpawnTroopGO();
+            }
         }
     }
 
     public void SpawnTroopGO()
     {
-        if(goldManager.SubGold(needGold))
-        {
+        //if(goldManager.SubGold(needGold))
+        //{
             for (int i = 0; i < spawnTrans.Length; i++)
             {
                 GameObject GO = Instantiate(troop, spawnTrans[i]) as GameObject;
                 GO.transform.SetParent(parent);
             }
-        }
+        //}
     }
 
     //参数检查接口

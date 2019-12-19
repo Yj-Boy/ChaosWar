@@ -26,6 +26,7 @@ public class GoldManager : MonoBehaviour
         }
     }
 
+    private int initGold;
     private int gold;
 
     private void Awake()
@@ -35,8 +36,10 @@ public class GoldManager : MonoBehaviour
 
     private void Start()
     {
-        gold = 100;
-        UIManager.Instance.InitGoldSlider(gold);
+        initGold = 200;
+        gold = 80;
+        UIManager.Instance.InitGoldSlider(initGold);
+        UIManager.Instance.UpdateGoldSliderValue(gold);
     }
 
     public void AddGold(int amount)
@@ -49,7 +52,7 @@ public class GoldManager : MonoBehaviour
     {
         if(gold - amount<0)
         {
-            UIManager.Instance.ShowTipText("金币不足！");
+            UIManager.Instance.ShowTipText("魔力值不足！");
             return false;
         }
         else

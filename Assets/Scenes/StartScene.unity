@@ -872,7 +872,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2009633209}
+      - m_Target: {fileID: 2009633211}
         m_MethodName: LoadLoadingLevel
         m_Mode: 5
         m_Arguments:
@@ -892,6 +892,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: GameScene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2009633210}
+        m_MethodName: DestroyECS
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -2977,6 +2988,8 @@ GameObject:
   - component: {fileID: 2009633208}
   - component: {fileID: 2009633207}
   - component: {fileID: 2009633209}
+  - component: {fileID: 2009633210}
+  - component: {fileID: 2009633211}
   m_Layer: 0
   m_Name: ScriptManager
   m_TagString: Untagged
@@ -3012,6 +3025,44 @@ Transform:
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2009633209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009633206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8925c51d9021f446877fb33ff20a6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 200
+  position:
+    x: 0
+    y: 5
+    z: 30
+  radius: 10
+  rotateSpeed: 0.5
+  moveSpeed: 20
+  floatingSpeed: 15
+  floatingTopBound: 15
+  floatingBottomBound: 0
+  _mesh: {fileID: -2432090755550338912, guid: 211289e0b4303ab43a59d1717c044515, type: 3}
+  _material: {fileID: 2100000, guid: 71d03838c957da146b78543f7a6499b9, type: 2}
+--- !u!114 &2009633210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009633206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955aee64d7dd8064aa22949fadfe77b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDestroyECS: 0
+--- !u!114 &2009633211
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

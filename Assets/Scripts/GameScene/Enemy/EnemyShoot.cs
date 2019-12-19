@@ -35,6 +35,10 @@ public class EnemyShoot : MonoBehaviour
     void Update()
     {
         troopShooterNum = troopShooter.childCount;
+        if(targetTroopShooter==null)
+        {
+            lineRender.enabled = false;
+        }
     }
 
     //获得射击目标数量公有接口
@@ -56,7 +60,6 @@ public class EnemyShoot : MonoBehaviour
             index = Random.Range(0, troopShooterNum);
             targetTroopShooter = troopShooter.GetChild(index);
             tmpShootTargetV = lineTrans.position;
-
         }
         else
         {
@@ -85,15 +88,13 @@ public class EnemyShoot : MonoBehaviour
                         shootParticle.Play();
                         GetComponent<Animator>().SetTrigger("DevilHeadShoot");
                         
-                        //如果射击目标的血量小于0，则将当前射击目标设置为空
-                        if (targetTroopShooter.GetComponent<TroopsHealth>().currentHealth <= 0)
-                        {
-                            lineRender.enabled = false;
-                            targetTroopShooter = null;
-                        }
-                        timer = 0f;
+                        
                     }
                 }
+            }
+            else
+            {
+                lineRender.enabled = false;
             }
         }
 
@@ -109,23 +110,39 @@ public class EnemyShoot : MonoBehaviour
             shootParticle.Stop();
 
             lineTimer += Time.deltaTime;
-            if (lineTimer <= 1f)
+            if (lineTimer <= 0.5f)
             {
-                //tmpShootTargetV = Vector3.Lerp(lineTrans.position, targetTroopShooter.position, 3f * Time.deltaTime);
-                tmpShootTargetV += (targetTroopShooter.position - lineTrans.position).normalized * Time.deltaTime * 90f;
+                if(targetTroopShooter==null)
+                {
+                    lineRender.enabled = false;
+                }
+                else
+                {
+                    Vector3 vec3 = targetTroopShooter.position;
+                    vec3.y += 2f;
+                    //tmpShootTargetV = Vector3.Lerp(lineTrans.position, vec3, 30f * Time.deltaTime);
+                    tmpShootTargetV += (vec3 - lineTrans.position).normalized * Time.deltaTime * 90f;
 
-                lineRender.SetPosition(1, tmpShootTargetV);
-                //Debug.Log("lineShoot");
+                    lineRender.SetPosition(1, tmpShootTargetV);
+                }              
+                
             }
             else
             {
+                isShooting = false;
                 lineRender.enabled = false;
-                targetTroopShooter.GetComponent<TroopsHealth>().TakeDamage(20);
-                targetTroopShooter.GetComponent<TroopShooterController>().SetStateToGetHit();
-                lineTimer = 0f;
                 tmpShootTargetV = lineTrans.position;
-                isShooting = false;      
-                GetComponent<NavMeshAgent>().enabled = true;
+                targetTroopShooter.GetComponent<TroopsHealth>().TakeDamage(5);
+                targetTroopShooter.GetComponent<TroopShooterController>().SetStateToGetHit();
+                //如果射击目标的血量小于0，则将当前射击目标设置为空
+                if (targetTroopShooter.GetComponent<TroopsHealth>().currentHealth <= 0)
+                {
+                    lineRender.enabled = false;
+                    targetTroopShooter = null;
+                }            
+                GetComponent<NavMeshAgent>().enabled = true; 
+                lineTimer = 0f;
+                timer = 0f;
             }
 
             //}

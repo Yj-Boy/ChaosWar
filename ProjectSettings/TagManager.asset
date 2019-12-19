@@ -13,6 +13,8 @@ TagManager:
   - CastleAttackTarget
   - BossAttackTarget
   - TroopECSCollider
+  - BossMainSkillCollider
+  - CastleAttackTarget2
   layers:
   - Default
   - TransparentFX

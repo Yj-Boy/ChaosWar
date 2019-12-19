@@ -75,6 +75,12 @@ public class BossHpController : MonoBehaviour
     {
         //死亡的相关操作
         //UIManager.Instance.ShowWinOrLoseText(true);
+        Invoke("GameOver", 1f);
+    }
+
+    private void GameOver()
+    {
         UIManager.Instance.ShowGameOver(true);
+        CancelInvoke();
     }
 }

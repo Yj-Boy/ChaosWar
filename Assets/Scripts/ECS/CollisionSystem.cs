@@ -62,7 +62,6 @@ public class CollisionSystem : JobComponentSystem
                     //判断是否碰撞
                     if (CheckCollision2(pos.Value, pos2.Value, 2))
                     {
-                        Debug.Log("xxxxxxxxxxxxxxxxxx");
                         isDestroy.value = true;
                     }
                 }

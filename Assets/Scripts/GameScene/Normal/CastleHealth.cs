@@ -47,9 +47,13 @@ public class CastleHealth : MonoBehaviour
     {
         if(IsDead())
         {
-            UIManager.Instance.ShowGameOver(false);
-            //UIManager.Instance.ShowWinOrLoseText(false);
+            Invoke("GameOver", 1f);
         }
+    }
+
+    private void GameOver()
+    {
+        UIManager.Instance.ShowGameOver(false);
     }
 
     //加血接口

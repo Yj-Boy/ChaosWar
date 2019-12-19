@@ -4872,7 +4872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb10a21d87e2fc14ebedde364419b2f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenAttack: 5
+  timeBetweenAttack: 3
   lineRender: {fileID: 461441961}
   lineTrans: {fileID: 461441960}
   shootParticle: {fileID: 5575969837256591471}
@@ -4906,7 +4906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenAttack: 4
   attackParticles: {fileID: 465377020}
-  attackCastleNum: 20
+  attackCastleNum: 5
   sacrificeParticle: {fileID: 123232460254976186, guid: 8f6c6231cac00404c915f45871a33cea,
     type: 3}
 --- !u!95 &3233933368530373049

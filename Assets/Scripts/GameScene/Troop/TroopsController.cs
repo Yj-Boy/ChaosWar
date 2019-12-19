@@ -134,6 +134,10 @@ public class TroopsController : MonoBehaviour
         if (devilHeadList.childCount == 0 && targetDevilHead == null
             || transform.position.z > -10)
         {
+            if (transform.parent != null)
+            {
+                transform.SetParent(null);
+            }
             MoveToBossAttackTarget();
         }
         //如果攻击对象列表不为空且攻击目标为空，则从攻击对象列表中随机一个

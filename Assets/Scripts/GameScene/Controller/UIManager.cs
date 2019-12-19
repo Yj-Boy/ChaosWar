@@ -42,6 +42,7 @@ public class UIManager : MonoBehaviour
     public GameObject gameOver;             //游戏结束界面
     public Image twinkleImage;              //濒临死亡闪烁画面
     public GameObject pausePanel;           //暂停面板
+    public Text hurtTip;
 
     private float tmpHpSliderValue;         //血条中间转换值
     private float tmpGoldSliderValue;       //金币条中间转换值
@@ -84,6 +85,34 @@ public class UIManager : MonoBehaviour
 
         //濒临死亡画面闪烁
         ShowTwinkleImage();
+    }
+
+    //显示感叹号闪烁
+    public void ShowHurtTipShake()
+    {
+        ShowHurtTip();
+        Invoke("HideHurtTipShake", 2f);
+        Invoke("CancelInvoke", 2f);
+    }
+
+    //隐藏感叹号闪烁
+    private void HideHurtTipShake()
+    {
+        hurtTip.enabled = false;
+    }
+
+    //显示感叹号又隐藏
+    private void ShowHurtTip()
+    {
+        hurtTip.enabled = true;
+        Invoke("HideHurtTip", 0.2f);
+    }
+
+    //隐藏感叹号又显示
+    private void HideHurtTip()
+    {
+        hurtTip.enabled = false;
+        Invoke("ShowHurtTip", 0.2f);
     }
 
     //暂停游戏接口
@@ -135,20 +164,20 @@ public class UIManager : MonoBehaviour
     //濒临死亡画面闪烁
     private void ShowTwinkleImage()
     {
-        if (castleHpSlider.value <= 20)
+        if (castleHpSlider.value <= 30)
         {
-            if (color.a >= 0.045f)
+            if (color.a >= 0.19f)
             {
                 twinkleValue = 0;
             }
             if (color.a <= 0.01f)
             {
-                twinkleValue = 0.05f;
+                twinkleValue = 0.2f;
             }
             color.a = Mathf.Lerp(
                 color.a,
                 twinkleValue,
-                2.5f * Time.deltaTime
+                2.7f * Time.deltaTime
                 );
             twinkleImage.color = color;
         }      
@@ -165,13 +194,17 @@ public class UIManager : MonoBehaviour
     //显示游戏结束画面
     public void ShowGameOver(bool resule)
     {
+        if(gameOver.activeSelf)
+        {
+            return;
+        }
         gameOver.SetActive(true);
         gameOver.GetComponent<AudioSource>().time = 0.2f;
         gameOver.GetComponent<AudioSource>().Stop();
         gameOver.GetComponent<AudioSource>().Play();
         
         ShowWinOrLoseText(resule);
-       // PauseGame();
+        PauseGame();
     }
 
     //显示胜败Text
@@ -343,5 +376,6 @@ public class UIManager : MonoBehaviour
     public void HideTipText()
     {
         tipText.gameObject.SetActive(false);
+        CancelInvoke();
     }
 }

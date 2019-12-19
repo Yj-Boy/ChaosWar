@@ -51,7 +51,7 @@ public class CreateAsteroid : MonoBehaviour
         position = spawnTransform.position;
         //positionZtmp = position.z;
         //xDistance = position.x;
-        Debug.Log("position:" + position);
+        //Debug.Log("position:" + position);
 
         //初始化实体管理对象
         entityManager = World.Active.EntityManager;

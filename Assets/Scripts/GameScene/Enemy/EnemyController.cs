@@ -39,10 +39,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            Debug.Log("State:" + enemyState);
-        }
         if(enemyState!=EnemyState.normal)
         {
             //若enemy的血量小于0，将enemy的状态切换为death
@@ -55,21 +51,24 @@ public class EnemyController : MonoBehaviour
                 //若场上同时有攻击目标也有射击目标，优先进行攻击
                 if (GetComponent<EnemyAttack>().GetTroopsNum() != 0
                 && GetComponent<EnemyShoot>().GetTroopShooterNum() != 0
-                &&transform.position.z<=-20)
+                &&transform.position.z<=-20
+                && transform.position.z >= -40)
                 {
                     enemyState = EnemyState.attack;
                 }
                 //若只有攻击目标，没有射击目标，转为射击状态
                 else if (GetComponent<EnemyAttack>().GetTroopsNum() != 0
                     && GetComponent<EnemyShoot>().GetTroopShooterNum() == 0
-                     && transform.position.z <= -20)
+                     && transform.position.z <= -20
+                     && transform.position.z >= -40)
                 {
                     enemyState = EnemyState.attack;
                 }
                 //若只有射击目标，没有攻击目标，则转为攻击状态
                 else if (GetComponent<EnemyAttack>().GetTroopsNum() == 0
                     && GetComponent<EnemyShoot>().GetTroopShooterNum() != 0
-                     && transform.position.z <= -20)
+                     && transform.position.z <= -20
+                     && transform.position.z >= -40)
                 {
                     enemyState = EnemyState.shoot;
                 }
@@ -108,6 +107,11 @@ public class EnemyController : MonoBehaviour
             //死亡状态下，什么都不做
             case EnemyState.death:
                 break;
+        }
+
+        if (GetComponent<EnemyHealth>().currentHealth <= 0)
+        {
+            GetComponentInChildren<LineRenderer>().enabled = false;
         }
 
         //测试用

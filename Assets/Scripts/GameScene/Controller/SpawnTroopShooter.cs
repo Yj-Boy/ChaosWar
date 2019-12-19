@@ -28,12 +28,15 @@ public class SpawnTroopShooter : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E)
+        if(Input.GetKeyDown(KeyCode.W)
             &&UIManager.Instance.GetSkillButtonEnable(1))
         {
-            Debug.Log(UIManager.Instance.GetSkillButtonEnable(1));
-            UIManager.Instance.ResetSkillCountDownTime(1);
-            SpawnShooter();
+            if (goldManager.SubGold(needGold))
+            {
+                //Debug.Log(UIManager.Instance.GetSkillButtonEnable(1));
+                UIManager.Instance.ResetSkillCountDownTime(1);
+                SpawnShooter();
+            }               
         }
     }
 
@@ -52,18 +55,31 @@ public class SpawnTroopShooter : MonoBehaviour
             UIManager.Instance.ShowTipText("射手已满");
             return;
         }
-        for (int i = 0; i < spawnTrans.Length; i++)
-        {        
-            //Debug.Log("GO:" + GO[i]);
-            if (GO[i] == null)
-            {           
-                if(goldManager.SubGold(needGold))
-                {
-                    GO[i] = Instantiate(shooter, spawnTrans[i]) as GameObject;
-                    GO[i].transform.SetParent(parent);
-                    break;
-                }              
-            }
+        //for (int i = 0; i < spawnTrans.Length; i++)
+        //{        
+        //    //Debug.Log("GO:" + GO[i]);
+        //    if (GO[i] == null)
+        //    {           
+        //        if(goldManager.SubGold(needGold))
+        //        {
+        //            GO[i] = Instantiate(shooter, spawnTrans[i]) as GameObject;
+        //            GO[i].transform.SetParent(parent);
+        //            break;
+        //        }              
+        //    }
+        //}
+        int x = Random.Range(0, spawnTrans.Length);
+        if (GO[x] == null)
+        {
+            //if (goldManager.SubGold(needGold))
+            //{
+                GO[x] = Instantiate(shooter, spawnTrans[x]) as GameObject;
+                GO[x].transform.SetParent(parent);
+            //}
+        }
+        else
+        {
+            x = Random.Range(0, spawnTrans.Length);
         }
     }
 

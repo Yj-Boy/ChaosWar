@@ -47,7 +47,6 @@ public class EnemyAttack : MonoBehaviour
         }
         if (other.CompareTag("TroopECSCollider"))
         {
-            Debug.Log("===================");
             Destroy(gameObject);
         }
     }

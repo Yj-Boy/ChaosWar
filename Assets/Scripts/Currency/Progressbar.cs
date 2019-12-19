@@ -53,8 +53,6 @@ public class Progressbar : MonoBehaviour
         if (text && slider)
         {          
             //更新Loading进度条和加载数字
-            Debug.Log("======");
-
             tempProgress = Mathf.Lerp(
                 tempProgress,
                 asyn.progress,

@@ -104,8 +104,9 @@
     <Compile Include="Assets\Scripts\ECS\TimeToLiveSystem.cs" />
     <Compile Include="Assets\Scripts\ECS\TroopsTagComponent.cs" />
     <Compile Include="Assets\Scripts\ECS\WallTagComponent.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Boss\BossController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Boss\BossController2.cs" />
     <Compile Include="Assets\Scripts\GameScene\Boss\BossHpController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Boss\BossMainSkillCollider.cs" />
     <Compile Include="Assets\Scripts\GameScene\Controller\GoldManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\Controller\SpawnDevilHead.cs" />
     <Compile Include="Assets\Scripts\GameScene\Controller\SpawnTroop.cs" />
